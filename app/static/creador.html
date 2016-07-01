@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>Creador</title>
+  <style>
+    html, body, .main {
+      margin: 0px;
+      padding: 0px;
+      overflow: hidden;
+    }
+
+    canvas {
+      margin: 0px;
+    }
+  </style>
+
+  <script src="/app/static/js/tablero.js"></script>
+  <script src="/app/static/js/punto.js"></script>
+  <script src="/app/static/js/circulo.js"></script>
+  <script src="/app/static/js/linea.js"></script>
+  <script src="/app/static/js/monitor.js"></script>
+  <script src="/app/static/js/oyente.js"></script>
+  <script src="/app/static/js/ia.js"></script>
+  <script src="/app/static/js/coleccion.js"></script>
+  <script src="/app/static/js/rectangulo.js"></script>
+  <script src="/app/static/js/area.js"></script>
+  <script src="/app/static/js/enlace.js"></script>
+
+</head>
+<body>
+  <div class="main">
+    <canvas id="canvas" width="1000" height="600">
+    </canvas>
+
+    <script>
+      var activo = false;
+      var cvs = "canvas";
+      var tablero = new Tablero(cvs);
+      var escenario = new Escenario(cvs,150,60,950,550);
+      var obj = new coleccionEscenario();
+
+      var monitor_objetos = new Area(cvs,0,0,138,550);
+      var monitor_obj = new Coleccion();
+
+      escenario.establecerGrilla();
+      obj.insertar(escenario.obtenerLimites());
+      obj.insertar(escenario);
+
+      var o = new Oyente(cvs);
+      o.detectorMovMouse();
+      o.escucharMouse();
+      o.escucharTeclado();
+
+      var inteligencia = new IA();
+
+      // Solo se ejecuta en la inicializacion.
+      obj.dibujarTodo();
+    </script>
+  </div>
+</body>
+</html>
