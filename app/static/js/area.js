@@ -11,7 +11,7 @@ function Area(canvas,xi,yi,xf,yf) {
 }
 
 // Verifica que el punto este el area.
-Area.prototype.estaEnEscenario = function(px,py,area) {
+Area.prototype.estaEnEscenario = function(px,py,area) {    
     return (area.xi<=px && area.xf>px && area.yi<=py && area.yf>py)
   }
 
@@ -19,6 +19,13 @@ Area.prototype.pintar = function(area) {
     var p = new Punto(area.ID, area.xi+5, area.yi+5);
     var r = new Rectangulo(area.ID, p, area.xf-5, area.yf-5);
     r.color = "white";
+    r.pintar();
+  }
+
+Area.prototype.colorear = function(area, color) {
+    var p = new Punto(area.ID, area.xi+5, area.yi+5);
+    var r = new Rectangulo(area.ID, p, area.xf-5, area.yf-5);
+    r.color = color;
     r.pintar();
   }
 

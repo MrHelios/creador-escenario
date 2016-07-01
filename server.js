@@ -10,5 +10,7 @@ app.listen(8080);
 var io = require('socket.io')(app);
 
 io.on('connection', function(socket){
-  // Por ahora nada.  
+  socket.on('guardar', function(data) {
+    console.log(data);
+  })
 });

@@ -46,6 +46,7 @@ function Oyente(canvas) {
       inteligencia.finalizarDibujo(obj,monitor_obj,self.ID,u.x,u.y,self.tecla);
 
       Tablero.prototype.limpiar(tablero);
+      Area.prototype.colorear(menu_servidor, 'red');
       monitor_obj.dibujarTodo();
       obj.dibujarTodo();
       self.activo = inteligencia.opuesto(self.activo);
@@ -75,6 +76,16 @@ function Oyente(canvas) {
         }
       }
     }
+
+    // Para guarda la informacion en la base de datos.
+    else if(!self.activo && Area.prototype.estaEnEscenario(event.x, event.y, menu_servidor)) {
+
+      var recolectado = Socket.prototype.recolectar(monitor_obj.objetos);
+      var comparar = Socket.prototype.comparar(recolectado, socket.ultimo_enviado);
+      Socket.prototype.enviar(comparar, socket);
+      Area.prototype.colorear(menu_servidor, 'blue');
+    }
+
   }
 
   this.movMouse = function(event) {
@@ -95,6 +106,7 @@ function Oyente(canvas) {
 
       var p = inteligencia.reubicar(self.movmousex,self.movmousey);
       Tablero.prototype.limpiar(tablero);
+      Area.prototype.colorear(menu_servidor, 'red');
 
       if( Area.prototype.estaEnEscenario(p.x, p.y, escenario)) {
         monitor_obj.dibujarTodo();
@@ -159,6 +171,7 @@ function Oyente(canvas) {
       self.deshabilitarSeleccion();
 
       Tablero.prototype.limpiar(tablero);
+      Area.prototype.colorear(menu_servidor, 'red');
       monitor_obj.dibujarTodo();
       obj.dibujarTodo();
     }
