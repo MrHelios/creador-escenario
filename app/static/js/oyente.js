@@ -155,12 +155,7 @@ function Oyente(canvas) {
     }
     // tecla: Del
     else if(event.keyCode==46 && self.seleccion_objeto != -1 && self.seleccion_enlace != -1) {
-      /*
-      for(var i=0; i<3;i++) {
-        obj.objetos.pop();
-        obj.cant--;
-      }
-      */
+      
       obj.eliminar(obj.objetos[self.seleccion_objeto + 1]);
       obj.eliminar(obj.objetos[self.seleccion_objeto]);
       obj.eliminar(obj.objetos[self.seleccion_objeto - 1]);

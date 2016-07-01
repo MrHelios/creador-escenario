@@ -10,7 +10,7 @@ function DB(archivo) {
   }
 }
 
-function Tabla(nombre, db) {  
+function Tabla(nombre, db) {
   this.db = db;
   self = this;
   this.nombre = nombre;
@@ -25,8 +25,9 @@ function Tabla(nombre, db) {
     self.db.serialize(function() {
       var s = '(';
       for(var i in self.valores) {
-        s += i +' '+ self.valores[i];
+        s += i +' '+ self.valores[i] +',';
       }
+      s = s.substring(0,s.length-1);
       s += ')';
       console.log(s);
       self.db.run('CREATE TABLE IF NOT EXISTS ' + self.nombre + ' ' + s);
@@ -36,14 +37,14 @@ function Tabla(nombre, db) {
   this.insertar = function(valores) {
     var s = Tabla.prototype.acomodarINSERT(valores);
 
-    console.log('INSERT INTO ' + this.nombre + ' VALUES ' + s);
+    //console.log('INSERT INTO ' + this.nombre + ' VALUES ' + s);
     this.db.run('INSERT INTO ' + this.nombre + ' VALUES ' + s);
   }
 
   this.mostrar = function() {
     var s = Tabla.prototype.acomodarSELECT(this.valores);
 
-    console.log('Mostrar:' + s);
+    //console.log('Mostrar:' + s);
     this.db.each('SELECT ' + s + ' FROM ' + this.nombre, function(err, fila) {
       if(err) console.log(err);
       else {
@@ -62,7 +63,7 @@ function Tabla(nombre, db) {
   }
 
   this.eliminar = function(num) {
-    this.db.each('DELETE FROM ' + this.nombre + ' WHERE id=' + num, function(err, fila) {
+    this.db.each('DELETE FROM ' + this.nombre + ' WHERE ' + num, function(err, fila) {
       if(err) console.log(err);
       else {
         console.log('Eliminado.');

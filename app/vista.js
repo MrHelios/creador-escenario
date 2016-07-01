@@ -1,11 +1,8 @@
 var miframe = require('../miFrame/template.js');
-var modelo = require('./modelo.js');
 
-
-index = function(request, response) {  
+index = function(request, response) {
   miframe.render(__dirname + '/static/index.html', response);
 }
-
 
 creador = function(request, response) {
   // Boludear con el GET o POST
