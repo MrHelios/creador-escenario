@@ -1,18 +1,10 @@
 <html>
 <head>
   <title>Creador</title>
-  <style>
-    html, body, .main {
-      margin: 0px;
-      padding: 0px;
-      overflow: hidden;
-    }
 
-    canvas {
-      margin: 0px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/app/static/css/creador.css">  
 
+  <!-- Programas necesarios para creador  -->
   <script src="/app/static/js/tablero.js"></script>
   <script src="/app/static/js/punto.js"></script>
   <script src="/app/static/js/circulo.js"></script>
@@ -25,6 +17,7 @@
   <script src="/app/static/js/area.js"></script>
   <script src="/app/static/js/enlace.js"></script>
 
+  <!-- Conexion con el server -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="/app/static/js/conexion.js"></script>
 </head>
@@ -33,35 +26,8 @@
     <canvas id="canvas" width="1000" height="600">
     </canvas>
 
-    <script>
-      var activo = false;
-      var cvs = "canvas";
-      var tablero = new Tablero(cvs);
-      var escenario = new Escenario(cvs,150,60,950,550);
-      var obj = new coleccionEscenario();
-
-      var monitor_objetos = new Area(cvs,0,0,138,550);
-      var monitor_obj = new Coleccion();
-
-      var menu_servidor = new Area(cvs,140,0,100,50);
-      Area.prototype.colorear(menu_servidor, 'red');
-
-      var socket = new Socket();
-
-      escenario.establecerGrilla();
-      obj.insertar(escenario.obtenerLimites());
-      obj.insertar(escenario);
-
-      var o = new Oyente(cvs);
-      o.detectorMovMouse();
-      o.escucharMouse();
-      o.escucharTeclado();
-
-      var inteligencia = new IA();
-
-      // Solo se ejecuta en la inicializacion.
-      obj.dibujarTodo();
-    </script>
+    <!-- Creador -->
+    <script src="/app/static/js/creador.js"></script>
   </div>
 </body>
 </html>

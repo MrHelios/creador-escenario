@@ -23,8 +23,12 @@ render_otro = function(direccion, response, tipo) {
       response.end(data);
     }
     else {
-      if( tipo == '.js') response.setHeader('content-type','text/javascript');
-      else if( tipo == '.css') response.setHeader('content-type','text/css');
+      if( tipo == '.js') {
+        response.setHeader('content-type','text/javascript');
+      }
+      else if( tipo == '.css') {
+        response.setHeader('content-type','text/css');
+      }
       response.setHeader('content-length', data.length);
       response.statusCode = 200;
       response.end(data);
