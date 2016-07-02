@@ -11,7 +11,7 @@ app.listen(8080);
 
 var io = require('socket.io')(app);
 
-io.on('connection', function(socket){
+io.on('connection', function(socket){  
   // Guarda la informacion.
   socket.on('guardar', modelo.conexion_db);
 });

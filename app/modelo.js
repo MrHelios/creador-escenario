@@ -6,6 +6,9 @@ database.crearDatabase();
 var tabla_archivos = new db.Tabla('archivo', database.db);
 tabla_archivos.agregarValores('nombre', 'TEXT');
 tabla_archivos.crearTabla();
+tabla_archivos.insertar({'nombre': '"hola"'});
+tabla_archivos.insertar({'nombre': '"chauchas"'});
+tabla_archivos.insertar({'nombre': '"jeje"'});
 
 var tabla_rect = new db.Tabla('rect', database.db);
 tabla_rect.agregarValores('nombre', 'VARCHAR(255)');
@@ -61,9 +64,8 @@ organizar = function(data) {
   return armado;
 }
 
+
 module.exports.conexion_db = conexion_db;
-/*
 module.exports.tabla_archivos = tabla_archivos;
 module.exports.tabla_linea = tabla_linea;
 module.exports.tabla_rect = tabla_rect;
-*/

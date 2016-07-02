@@ -1,12 +1,16 @@
 var miframe = require('../miFrame/template.js');
+var vista = require('./modelo.js');
 
 index = function(request, response) {
-  miframe.render(__dirname + '/static/index.html', response);
+  vista.tabla_archivos.buscar('',[miframe.render, __dirname + '/static/index.html', response]);
 }
 
 creador = function(request, response) {
-  // Boludear con el GET o POST
-  miframe.render(__dirname + '/static/creador.html', response);
+  if(request.method == 'GET') {
+    response.write('Lo sentimos, pero a esta pagina no puedes acceder. :-)');
+    response.end();
+  }
+  else if(request.method == 'POST') miframe.render(__dirname + '/static/creador.html', response);
 }
 
 module.exports.index = index;

@@ -53,11 +53,21 @@ function Tabla(nombre, db) {
     });
   }
 
-  this.buscar = function(num) {
-    this.db.each('SELECT * FROM ' + this.nombre + ' WHERE id=' + num, function(err, fila) {
+  // Este metodo lo utilizo para buscar en base de datos y generar pagina HTML.
+  // Hacer el metodo mas generico.
+  // El parametro f es un arreglo
+  this.buscar = function(num, f) {
+
+    this.db.all('SELECT * FROM ' + this.nombre + num, function(err, fila) {
       if(err) console.log(err);
       else {
-        console.log('Resultado: ' + fila);
+        dicc = {};
+        // Genera codigo HTML.
+        for(var i=0; i<fila.length; i++) {
+          dicc[i] = '<li>' + fila[i]['nombre'] + '</li>';
+        }
+        // Metodo(direccion archivo HTML, respuest SERVER)
+        f[0](f[1],f[2],dicc);
       }
     });
   }

@@ -2,13 +2,16 @@ var fs = require('fs');
 var path = require('path');
 
 // Para HTML
-render = function(direccion, response) {
+render = function(direccion, response, adicional) {
   fs.readFile(direccion, function(err,data) {
     if(err) {
       console.log(err);
       response.end();
     }
     else {
+      if(adicional) {
+        data = Templates.prototype.agregarArchivo(data, '{{templates}}', adicional);
+      }
       response.write(data);
       response.end();
     }
@@ -38,6 +41,20 @@ render_otro = function(direccion, response, tipo) {
 
 var direccion = function(abs,archivo) {
   return path.join(abs.substring(0,abs.lastIndexOf('/')), archivo);
+}
+
+function Templates() {
+  // Nada por ahora.
+}
+
+Templates.prototype.agregarArchivo = function(data, palabra, reemplazar) {
+  html = "" + data;
+  var s = html.indexOf(palabra);
+  for(var k in reemplazar) {
+    html = html.substring(0,s) + reemplazar[k] + html.substring(s, html.length);
+  }
+  html = html.replace(palabra, '');
+  return html;
 }
 
 module.exports.render = render;
