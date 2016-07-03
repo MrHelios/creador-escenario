@@ -2,20 +2,46 @@ var fs = require('fs');
 var path = require('path');
 
 // Para HTML
-render = function(direccion, response, adicional) {
+render = function(direccion, response, cambiar, adicional) {
   fs.readFile(direccion, function(err,data) {
     if(err) {
       console.log(err);
       response.end();
     }
     else {
-      if(adicional) {
-        data = Templates.prototype.agregarArchivo(data, '{{templates}}', adicional);
+      // Solo para index.
+      if(adicional && 'templates' in cambiar) {
+        for(k in cambiar) {          
+          data = Templates.prototype.agregarArchivo(data, cambiar[k], adicional);
+        }
+      }
+      // Para creador.
+      else {
+        for(k in cambiar) {
+          data = Templates.prototype.agregarArchivo(data, cambiar[k], adicional[k]);
+        }
       }
       response.write(data);
       response.end();
     }
   })
+}
+
+Templates.prototype.agregarArchivo = function(data, palabra, reemplazar) {
+  html = "" + data;
+
+  if(typeof reemplazar == typeof "") {
+    while(html.indexOf(palabra) != -1) html = html.replace(palabra, reemplazar);
+  }
+  else {
+    var s = html.indexOf(palabra);
+    console.log(reemplazar);
+    for(var k in reemplazar) {
+      html = html.substring(0,s) + reemplazar[k] + html.substring(s, html.length);
+    }
+    html = html.replace(palabra, '');
+  }
+  return html;
 }
 
 // Para otro tipo. (CSS, JS, jpeg, json,etc)
@@ -45,16 +71,6 @@ var direccion = function(abs,archivo) {
 
 function Templates() {
   // Nada por ahora.
-}
-
-Templates.prototype.agregarArchivo = function(data, palabra, reemplazar) {
-  html = "" + data;
-  var s = html.indexOf(palabra);
-  for(var k in reemplazar) {
-    html = html.substring(0,s) + reemplazar[k] + html.substring(s, html.length);
-  }
-  html = html.replace(palabra, '');
-  return html;
 }
 
 module.exports.render = render;

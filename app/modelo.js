@@ -6,9 +6,11 @@ database.crearDatabase();
 var tabla_archivos = new db.Tabla('archivo', database.db);
 tabla_archivos.agregarValores('nombre', 'TEXT');
 tabla_archivos.crearTabla();
+/*
 tabla_archivos.insertar({'nombre': '"hola"'});
 tabla_archivos.insertar({'nombre': '"chauchas"'});
 tabla_archivos.insertar({'nombre': '"jeje"'});
+*/
 
 var tabla_rect = new db.Tabla('rect', database.db);
 tabla_rect.agregarValores('nombre', 'VARCHAR(255)');
@@ -48,14 +50,14 @@ organizar = function(data) {
   var armado = [];
 
   if(data.tipo == 'linea') {
-    armado.push('"archivo"');
+    armado.push('"' + data.nombre + '"');
     armado.push(data.xi);
     armado.push(data.yi);
     armado.push(data.xf);
     armado.push(data.yf);
   }
   else {
-    armado.push('"archivo"');
+    armado.push('"' + data.nombre + '"');
     armado.push(data.xi);
     armado.push(data.yi);
     armado.push(data.a);

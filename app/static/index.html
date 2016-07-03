@@ -1,6 +1,12 @@
 <html>
 <head>
-  <title>Index</title>  
+  <title>Index</title>
+  <style>
+  .nada {
+    list-style-type: none;
+    margin: 3px;
+  }
+  </style>
 </head>
 
 <body>
@@ -18,8 +24,12 @@
     <div id="cajaBusqueda">
     <h2>Ir a la seccion de creacion</h2>
       <form method="post" action="/creador">
-        Nombre del archivo <input type="text" name="archivo">
-        <input type="submit" value="Buscar">
+      <ul>
+        <li class="nada">Nombre <input type="text" name="archivo"></li>
+        <li class="nada">Longitud <input type="text" name="long"></li>
+        <li class="nada">Altura <input type="text" name="altura"></li>
+        <li class="nada"><input type="submit" value="Buscar"></li>
+      <ul>
       </form>
     </div>
 

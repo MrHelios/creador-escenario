@@ -12,6 +12,7 @@ Socket.prototype.recolectar = function(objeto) {
     if(objeto[i].info instanceof Linea) {
       dato = { tipo: 'linea',
             accion: '',
+            nombre: nombre_archivo_mapa,
             xi: objeto[i].info.obtenerPI().obtenerX(),
             yi: objeto[i].info.obtenerPI().obtenerY(),
             xf: objeto[i].info.obtenerPF().obtenerX(),
@@ -21,6 +22,7 @@ Socket.prototype.recolectar = function(objeto) {
     else {
       dato = { tipo: 'rectangulo',
             accion: '',
+            nombre: nombre_archivo_mapa,
             xi: objeto[i].info.obtenerPI().obtenerX(),
             yi: objeto[i].info.obtenerPI().obtenerY(),
             a: objeto[i].info.obtenerAltura(),

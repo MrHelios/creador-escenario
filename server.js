@@ -2,6 +2,7 @@ var http = require('http');
 var urls = require('./app/urls');
 var u = require('./miFrame/url');
 var modelo = require('./app/modelo');
+var vista = require('./app/vista');
 
 
 var app = http.createServer(function(request, response) {

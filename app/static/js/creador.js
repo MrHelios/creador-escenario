@@ -10,7 +10,7 @@ var monitor_obj = new Coleccion();
 var menu_servidor = new Area(cvs,140,0,100,50);
 Area.prototype.colorear(menu_servidor, 'red');
 
-var socket = new Socket();
+var s = new Socket();
 
 escenario.establecerGrilla();
 obj.insertar(escenario.obtenerLimites());
@@ -25,3 +25,8 @@ var inteligencia = new IA();
 
 // Solo se ejecuta en la inicializacion.
 obj.dibujarTodo();
+
+
+nombre = {{nombre}};
+longitud = {{longitud}};
+altura = {{altura}};
