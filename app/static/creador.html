@@ -22,44 +22,43 @@
   <script src="/app/static/js/conexion.js"></script>
 </head>
 <body>
-  <div class="main">
+  <div class="main">    
     <canvas id="canvas" width="1000" height="800">
     </canvas>
 
     <!-- Creador -->
     <script>
-    var activo = false;
-    var cvs = "canvas";
-    var nombre_archivo_mapa = {{nombre}};
-    var tablero = new Tablero(cvs);
-    // ACA SE ARMA EL ESCENARIO.
-    var escenario = new Escenario(cvs,150,60,{{longitud}},{{altura}});
-    var obj = new coleccionEscenario();
+      var activo = false;
+      var cvs = "canvas";
+      var nombre_archivo_mapa = {{nombre}};
+      var tablero = new Tablero(cvs);
+      // ACA SE ARMA EL ESCENARIO.
+      var escenario = new Escenario(cvs,150,60,{{longitud}},{{altura}});
+      var obj = new coleccionEscenario();
 
-    var monitor_objetos = new Area(cvs,0,0,138,550);
-    var monitor_obj = new Coleccion();
+      var monitor_objetos = new Area(cvs,0,0,138,550);
+      var monitor_obj = new Coleccion();
 
-    var menu_servidor = new Area(cvs,140,0,100,50);
-    Area.prototype.colorear(menu_servidor, 'red');
+      var menu_servidor = new Area(cvs,140,0,100,50);
+      Area.prototype.colorear(menu_servidor, 'red');
 
-    var o = new Oyente(cvs);
-    var inteligencia = new IA();
+      var o = new Oyente(cvs);
+      var inteligencia = new IA();
 
-    var socket = new Socket();
-    socket.onLinea(nombre_archivo_mapa + '-linea');
-    socket.onRect(nombre_archivo_mapa + '-rect');
+      var socket = new Socket();
+      socket.onLinea(nombre_archivo_mapa + '-linea');
+      socket.onRect(nombre_archivo_mapa + '-rect');
 
-    escenario.establecerGrilla();
-    obj.insertar(escenario.obtenerLimites());
-    obj.insertar(escenario);
+      escenario.establecerGrilla();
+      obj.insertar(escenario.obtenerLimites());
+      obj.insertar(escenario);
 
-    o.detectorMovMouse();
-    o.escucharMouse();
-    o.escucharTeclado();
+      o.detectorMovMouse();
+      o.escucharMouse();
+      o.escucharTeclado();
 
-    // Solo se ejecuta en la inicializacion.
-    obj.dibujarTodo();
-
+      // Solo se ejecuta en la inicializacion.
+      obj.dibujarTodo();
     </script>
   </div>
 </body>

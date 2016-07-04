@@ -11,8 +11,9 @@ function Socket() {
     this.ultimo_enviado.push(data);
   }
 
+  // Se agregan elementos de lineas.
   this.onLinea = function(nombre) {
-    this.socket.on(nombre, function(data) {      
+    this.socket.on(nombre, function(data) {
       //(cvs, coleccion, coleccion_monitor, clickx, clicky, mousex, mousey, tecla)
 
       for(var i=0; i<data.length;i++) {
@@ -24,6 +25,7 @@ function Socket() {
     });
   }
 
+  // Se agregan elementos de rectangulo.
   this.onRect = function(nombre) {
     this.socket.on(nombre, function(data) {
       //(cvs, coleccion, coleccion_monitor, clickx, clicky, mousex, mousey, tecla)
@@ -36,6 +38,7 @@ function Socket() {
       obj.dibujarTodo();
     });
   }
+  
 }
 
 Socket.prototype.recolectar = function(objeto) {

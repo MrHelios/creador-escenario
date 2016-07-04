@@ -14,8 +14,17 @@ var io = require('socket.io')(app);
 
 io.on('connection', function(socket){
   // Guarda la informacion.
-  modelo.tabla_linea.agregar(" WHERE nombre="  + '"archivito"' , 'archivito-linea', socket);
-  modelo.tabla_rect.agregar(" WHERE nombre="  + '"archivito"' , 'archivito-rect', socket);
-  // socket.emit("archivito", modelo.tabla_linea.agregar(" WHERE nombre="  + '"archivito"' , 'archivito', socket));
+  var i=0;
+  var encontrado=false;
+  while(i<socket.request['rawHeaders'].length && !encontrado) {
+    encontrado = socket.request['rawHeaders'][i];
+    i++;
+  }
+
+  if(encontrado) {    
+    modelo.tabla_linea.agregar(" WHERE nombre="  + '"archivito"' , 'archivito-linea', socket);
+    modelo.tabla_rect.agregar(" WHERE nombre="  + '"archivito"' , 'archivito-rect', socket);
+  }
+
   socket.on('guardar', modelo.conexion_db);
 });
