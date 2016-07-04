@@ -29,8 +29,7 @@ tabla_linea.agregarValores('xf','INTEGER');
 tabla_linea.agregarValores('yf','INTEGER');
 tabla_linea.crearTabla();
 
-var conexion_db = function(data) {
-  //console.log(data);
+var conexion_db = function(data) {  
 
   for(var i=0; i<data.length; i++) {
     if(data[i].accion == 'agregar') {

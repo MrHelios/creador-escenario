@@ -38,6 +38,7 @@ function Tabla(nombre, db) {
     var s = Tabla.prototype.acomodarINSERT(valores);
 
     //console.log('INSERT INTO ' + this.nombre + ' VALUES ' + s);
+    console.log('Te estas ejecutando?');
     this.db.run('INSERT INTO ' + this.nombre + ' VALUES ' + s);
   }
 
@@ -72,12 +73,24 @@ function Tabla(nombre, db) {
     });
   }
 
-  this.buscar = function(num, f) {
+  // Este metodo lo utilizamos para enviar info a la pagina.
+  this.agregar = function(num, nombre, f) {
+
+    this.db.all('SELECT * FROM ' + this.nombre + num, function(err,fila) {
+      if(err) console.log(err);
+      else {
+        f.emit(nombre, fila);
+      }
+    });
+  }
+
+  // Lo utilizo para ver si ya existe el archivo.
+  this.buscar = function(num, f, valor) {
 
     this.db.get('SELECT * FROM ' + this.nombre + num, function(err, fila) {
       if(err) console.log(err);
       else {
-        if(!fila) f
+        if(!fila) f.insertar(valor);
       }
     });
   }

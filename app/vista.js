@@ -15,7 +15,7 @@ creador = function(request, response) {
     request.on('data', function(chunk) {
       dicc = creadorPOST(chunk);
 
-      vista.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , vista.tabla_archivos.insertar({'nombre': dicc.archivo}));
+      vista.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , vista.tabla_archivos, {'nombre': dicc.archivo});
       miframe.render(__dirname + '/static/creador.html', response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}'}, dicc);
     })
   }

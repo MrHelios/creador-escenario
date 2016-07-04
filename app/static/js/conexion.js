@@ -2,6 +2,40 @@
 function Socket() {
   this.socket = io();
   this.ultimo_enviado = [];
+
+  self = this;
+
+  // Recolecta el estado del archivo.
+  // Esto se ejecuta al inicio.
+  this.ult_enviado = function(data) {
+    this.ultimo_enviado.push(data);
+  }
+
+  this.onLinea = function(nombre) {
+    this.socket.on(nombre, function(data) {      
+      //(cvs, coleccion, coleccion_monitor, clickx, clicky, mousex, mousey, tecla)
+
+      for(var i=0; i<data.length;i++) {
+        self.ult_enviado({'tipo': 'linea', 'nombre':nombre_archivo_mapa, 'accion':'conservar', 'xi':data[i].xi, 'yi':data[i].yi, 'xf':data[i].xf, 'yf':data[i].yf});
+        IA.prototype.dibujar(cvs, obj, monitor_obj, data[i].xi, data[i].yi, data[i].xf, data[i].yf, 76);
+      }
+      monitor_obj.dibujarTodo();
+      obj.dibujarTodo();
+    });
+  }
+
+  this.onRect = function(nombre) {
+    this.socket.on(nombre, function(data) {
+      //(cvs, coleccion, coleccion_monitor, clickx, clicky, mousex, mousey, tecla)
+
+      for(var i=0; i<data.length;i++) {
+        self.ult_enviado({'tipo': 'rectangulo', 'nombre':nombre_archivo_mapa, 'accion':'conservar', 'xi':data[i].xi, 'yi':data[i].yi, 'l':data[i].l, 'a':data[i].a});
+        IA.prototype.dibujar(cvs, obj, monitor_obj, data[i].xi, data[i].yi, data[i].l, data[i].a, 82);
+      }
+      monitor_obj.dibujarTodo();
+      obj.dibujarTodo();
+    });
+  }
 }
 
 Socket.prototype.recolectar = function(objeto) {

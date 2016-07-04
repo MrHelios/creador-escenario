@@ -113,6 +113,61 @@ function IA() {
 
 }
 
+// Requiere que existan coleccion y coleccion_monitor.
+// Arma la linea.
+// Este metodo se ejecutara al inicio solo para recuperar.
+
+// coleccion,cvs,clickx,clicky,mousex,mousey,tecla
+// coleccion, coleccion_monitor, cvs, clickx, clicky, tecla
+IA.prototype.dibujar = function(cvs, coleccion, coleccion_monitor, clickx, clicky, mousex, mousey, tecla) {
+  var c = new Circulo(cvs,3,new Punto(cvs,clickx,clicky));
+  c.color = "red";
+  coleccion.insertar(c);
+
+  if(tecla == 76){
+    var l = new Linea(cvs,new Punto(cvs,clickx,clicky),new Punto(cvs,mousex,mousey));
+    l.color = "blue";
+    coleccion.insertar(l);
+  }
+  else if(tecla == 82){
+    var l = new Rectangulo(cvs,new Punto(cvs,clickx,clicky),mousex,mousey);
+    l.color = "blue";
+    coleccion.insertar(l);
+  }
+
+  var l = coleccion.objetos[coleccion.cant - 1];
+  var establecido = true;
+
+  if(tecla == 76) {
+    var c = new Circulo(cvs,3,new Punto(cvs, mousex, mousey));
+    c.color = "red";
+    coleccion.insertar(c);
+  }
+  // Establecemos las medidas del Rectangulo.
+  else if(tecla == 82) {
+    var c = new Circulo(cvs,3,new Punto(cvs, clickx+mousex, clicky+mousey));
+    c.color = "red";
+    coleccion.insertar(c);
+  }  
+
+  // Creacion del Enlace.
+  if(establecido) {
+    c = coleccion_monitor.cant - 1;
+    if(c == -1) {
+      coleccion_monitor.insertar(new enlaceEscenario(cvs, l));
+      coleccion_monitor.objetos[0].colorActual = coleccion_monitor.objetos[0].color;
+    }
+    else {
+      // Agrego el punto del ultimo elemento.
+      coleccion_monitor.insertar(new enlaceEscenario(cvs, l,coleccion_monitor.objetos[c].punto.clone()));
+      // Le sumo 35 px.
+      coleccion_monitor.objetos[c+1].punto.establecerY(coleccion_monitor.objetos[c+1].punto.obtenerY() + 35);
+      coleccion_monitor.objetos[coleccion_monitor.cant-1].colorActual = coleccion_monitor.objetos[coleccion_monitor.cant-1].color;
+    }
+  }
+
+}
+
 // Ubica la posicion en una posicion Multiplo de 10.
 // Se ejecutara cuando se ejecute reubicar.
 IA.prototype.reubicarCuentas = function(numero) {
