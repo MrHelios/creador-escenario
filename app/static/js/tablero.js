@@ -1,7 +1,4 @@
-
-// Funcion donde se selecciona el ID.
-// Esta ideado para trabjar con canvas.
-
+// En la documentacion linea 7.
 function Tablero(canvas) {
   this.lienzo = document.getElementById(canvas).getContext("2d");
   this.ID = canvas;

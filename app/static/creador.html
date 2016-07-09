@@ -22,7 +22,7 @@
   <script src="/app/static/js/conexion.js"></script>
 </head>
 <body>
-  <div class="main">    
+  <div class="main">
     <canvas id="canvas" width="1000" height="800">
     </canvas>
 
@@ -33,7 +33,7 @@
       var nombre_archivo_mapa = {{nombre}};
       var tablero = new Tablero(cvs);
       // ACA SE ARMA EL ESCENARIO.
-      var escenario = new Escenario(cvs,150,60,{{longitud}},{{altura}});
+      var escenario = new Escenario(cvs,150,60,150+{{longitud}},60+{{altura}});
       var obj = new coleccionEscenario();
 
       var monitor_objetos = new Area(cvs,0,0,138,550);

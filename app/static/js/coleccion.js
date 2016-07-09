@@ -1,4 +1,4 @@
-// Funcion basica para trabajar con arreglos.
+// En la documentacion la linea 63.
 function Coleccion() {
   this.objetos = new Array();
   this.cant=0;
@@ -48,8 +48,7 @@ function Coleccion() {
 
 }
 
-// --------------------------------------------
-// Se especializa en dibujar parte del grillado.
+// En la Documentacion en la linea 81 
 function coleccionEscenario() {
   Coleccion.call(this);
 

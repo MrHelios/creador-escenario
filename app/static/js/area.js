@@ -1,5 +1,4 @@
-
-
+// En la documentacion linea 27.
 function Area(canvas,xi,yi,xf,yf) {
   Tablero.call(this,canvas);
 
@@ -7,7 +6,6 @@ function Area(canvas,xi,yi,xf,yf) {
   this.yi = yi;
   this.xf = xf;
   this.yf = yf;
-
 }
 
 // Verifica que el punto este el area.
@@ -30,12 +28,12 @@ Area.prototype.colorear = function(area, color) {
   }
 
 
-// Funcion que hereda de Area.
-// Funcion ideada para crear el grillado del escenario.
+// En la documentacion linea 43.
+// IMPORTANTE: Mejorar esta grilla.
 function Escenario(cvs,xi,yi,xf,yf,multi) {
   Area.call(this,cvs,xi,yi,xf,yf);
 
-  this.multiplicador = multi || 10;
+  this.multiplicador = 10;
   // xi: 15
   this.fila_inicio = this.xi/this.multiplicador;
   // yi: 6
@@ -63,6 +61,7 @@ function Escenario(cvs,xi,yi,xf,yf,multi) {
       }
     }
   }
+
   this.dibujarParte = function(i0,j0,ifinal,jfinal) {
     if(i0<this.fila_inicio) i0=this.fila_inicio;
     else if(ifinal>this.fila) ifinal=this.fila;
@@ -73,6 +72,7 @@ function Escenario(cvs,xi,yi,xf,yf,multi) {
     for(var i=i0; i<ifinal; i++) {
       for(var j=j0; j<jfinal; j++) {
         this.obtenerPos(i,j).dibujar();
+        console.log(this.grilla[i][j]);
       }
     }
   }

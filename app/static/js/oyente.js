@@ -1,6 +1,4 @@
-
-// Funcion que sirve para detectar movimiento y click del mouse
-// Tambien detecta movimiento del teclado.
+// En la Documentacion en la linea 90.
 function Oyente(canvas) {
   Tablero.call(this,canvas);
   this.activo = false;
@@ -11,8 +9,6 @@ function Oyente(canvas) {
   this.seleccion_objeto = -1;
   this.seleccion_enlace = -1;
 
-
-  // Importante para no perder el scope.
   var self = this;
 
   this.escucharTeclado = function() {
@@ -110,7 +106,9 @@ function Oyente(canvas) {
 
       if( Area.prototype.estaEnEscenario(p.x, p.y, escenario)) {
         monitor_obj.dibujarTodo();
-        obj.dibujarOpt(p.x/10 - 20,p.y/10 - 20,p.x/10 + 20,p.y/10 + 20);
+        obj.dibujarTodo();
+        // Hay que revisar, no renderiza bien la imagen.
+        //obj.dibujarOpt(p.x/10 - 20,p.y/10 - 20,p.x/10 + 20,p.y/10 + 20);
       }
       else {
         monitor_obj.dibujarTodo();
@@ -139,6 +137,7 @@ function Oyente(canvas) {
 
         self.activo = inteligencia.opuesto(self.activo);
         Tablero.prototype.limpiar(tablero);
+        Area.prototype.colorear(menu_servidor, 'red');
         monitor_obj.dibujarTodo();
         obj.dibujarTodo();
       }
@@ -147,6 +146,7 @@ function Oyente(canvas) {
         obj.objetos[self.seleccion_objeto].dibujar();
 
         tablero.limpiar();
+        Area.prototype.colorear(menu_servidor, 'red');
         monitor_obj.dibujarTodo();
         obj.dibujarTodo();
       }
@@ -155,7 +155,7 @@ function Oyente(canvas) {
     }
     // tecla: Del
     else if(event.keyCode==46 && self.seleccion_objeto != -1 && self.seleccion_enlace != -1) {
-      
+
       obj.eliminar(obj.objetos[self.seleccion_objeto + 1]);
       obj.eliminar(obj.objetos[self.seleccion_objeto]);
       obj.eliminar(obj.objetos[self.seleccion_objeto - 1]);

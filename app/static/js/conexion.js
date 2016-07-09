@@ -1,4 +1,4 @@
-
+// A partir de la linea 130.
 function Socket() {
   this.socket = io();
   this.ultimo_enviado = [];
@@ -38,7 +38,6 @@ function Socket() {
       obj.dibujarTodo();
     });
   }
-  
 }
 
 Socket.prototype.recolectar = function(objeto) {

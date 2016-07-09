@@ -1,3 +1,4 @@
+// A partir de la linea 110.
 function IA() {
 
   this.reubicar = function(posX,posY) {
@@ -148,7 +149,7 @@ IA.prototype.dibujar = function(cvs, coleccion, coleccion_monitor, clickx, click
     var c = new Circulo(cvs,3,new Punto(cvs, clickx+mousex, clicky+mousey));
     c.color = "red";
     coleccion.insertar(c);
-  }  
+  }
 
   // Creacion del Enlace.
   if(establecido) {
