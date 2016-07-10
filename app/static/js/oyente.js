@@ -33,7 +33,7 @@ function Oyente(canvas) {
 
     // Esto se realiza en el area-tablero.
     // Verifica si el primer click en el tablero tiene algun objeto seleccionado.
-    if(inteligencia.permitirDibujo(escenario,self.activo,u.x,u.y) && inteligencia.teclaCorrecta(self.tecla)) {
+    if(inteligencia.permitirDibujo(escenario,self.activo,u.x,u.y) && inteligencia.teclaCorrecta(self.tecla)) {      
       inteligencia.empezarDibujo(obj,self.ID,u.x,u.y,self.movmousex,self.movmousey,self.tecla);
       self.activo = inteligencia.opuesto(self.activo);
     }

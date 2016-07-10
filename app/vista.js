@@ -15,8 +15,8 @@ creador = function(request, response) {
     request.on('data', function(chunk) {
       dicc = creadorPOST(chunk);
 
-      vista.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , vista.tabla_archivos, {'nombre': dicc.archivo});
-      miframe.render(__dirname + '/static/creador.html', response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}'}, dicc);
+      vista.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , vista.tabla_archivos, {'nombre': dicc.archivo});      
+      miframe.render(__dirname + '/static/creador.html', response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}','canvas-long':'{{canvas-long}}','canvas-alt':'{{canvas-alt}}'}, dicc);
     })
   }
 }
@@ -29,7 +29,13 @@ var creadorPOST = function(chunk) {
     var s2 = s[i].split('=');
     dicc[s2[0]] = s2[1];
   }
-  dicc.archivo = "'"+ dicc.archivo +"'"
+  dicc.archivo = "'"+ dicc.archivo +"'";
+
+  if(dicc['long'] < 1000) dicc['canvas-long'] = '1000';
+  else dicc['canvas-long'] = dicc['long'];
+
+  if(dicc['altura'] < 800) dicc['canvas-alt'] = '800';
+  else dicc['canvas-alt'] = dicc['altura'];
   return dicc;
 }
 

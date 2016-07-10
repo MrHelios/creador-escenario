@@ -8,9 +8,9 @@ function Area(canvas,xi,yi,xf,yf) {
   this.yf = yf;
 }
 
-// Verifica que el punto este el area.
+// Verifica que el punto este entre los punto de vertices del area.
 Area.prototype.estaEnEscenario = function(px,py,area) {
-    return (area.xi<=px && (area.xi + area.xf)>px && area.yi<=py && (area.yi + area.yf)>py)
+    return (area.xi<=px && (area.xf)>px && area.yi<=py && (area.yf)>py)
   }
 
 Area.prototype.pintar = function(area) {
