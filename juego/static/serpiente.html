@@ -1,0 +1,74 @@
+<html>
+<head>
+  <title>Juego Serpiente + Javascript</title>
+
+  <link rel="stylesheet" type="text/css" href="/juego/static/css/serpiente.css">
+</head>
+
+<body>
+  <canvas id="canvas">
+  </canvas>
+
+  <script src="/juego/static/js/tablero.js"></script>
+  <script src="/juego/static/js/punto.js"></script>
+  <script src="/juego/static/js/linea.js"></script>
+  <script src="/juego/static/js/linea_mov.js"></script>
+  <script src="/juego/static/js/circulo.js"></script>
+  <script src="/juego/static/js/coleccion.js"></script>
+  <script src="/juego/static/js/oyente.js"></script>
+  <script src="/juego/static/js/actualizador.js"></script>
+  <script src="/juego/static/js/escenario.js"></script>
+  <script src="/juego/static/js/objetos.js"></script>
+  <script src="/juego/static/js/manzana.js"></script>
+
+  <script type="text/javascript">
+
+
+    // Establezco las dimensiones para el canvas.
+    var cvs = "canvas";
+    document.getElementById(cvs).setAttribute('width','400');
+    document.getElementById(cvs).setAttribute('height','400');
+    var victoria=true;
+
+    var tablero = new Tablero(cvs);
+    var esc = new Escenario(cvs);
+    var obj = new Objetos();
+
+    for(var i=0, fila=esc.fila(); i<=fila; i++) {
+      for(var j=0, columna=esc.columna(); j<=columna; j++) {
+          esc.establecerPos(i,j,obj.clone());
+          if(i==0 || i==fila || j==0 || j==columna) esc.obtenerPos(i,j).activarPared();
+      }
+    }
+
+    var punto = new Punto(cvs,50,200);
+    var punto2 = new Punto(cvs,50,205);
+    var linea = new Linea_Mov(cvs,punto,punto2);
+    var serpiente = new Coleccion(10);
+    serpiente.insertar(linea);
+    serpiente.extender(serpiente);
+
+    var punto3 = new Punto(cvs,100,100);
+    var manzana = new Manzana(cvs,3,punto3);
+    var manzanas = new Coleccion(3);
+
+    for(var i=0; i<3; i++) {
+      manzanas.insertar(manzana.clone());
+      manzanas.obtenerPos(i).posAleatoria();
+      manzanas.obtenerPos(i).color = "green";
+
+      var x = manzanas.obtenerPos(i).obtenerCentro().obtenerX();
+      var y = manzanas.obtenerPos(i).obtenerCentro().obtenerY();
+      esc.obtenerPos(x/5,y/5).activarManzana();
+      esc.obtenerPos(x/5,y/5).establecerManzana(i);
+    }
+
+    o = new Oyente();
+    o.escucharTeclado();
+
+    actualizacion();
+
+  </script>
+
+</body>
+</html>

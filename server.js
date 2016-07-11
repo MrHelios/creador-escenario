@@ -1,9 +1,17 @@
 var http = require('http');
-var urls = require('./app/urls');
+var urls_app = require('./app/urls');
+var urls_juego = require('./juego/urls');
 var u = require('./miFrame/url');
 var modelo = require('./app/modelo');
 var vista = require('./app/vista');
 
+urls = {};
+for(k in urls_app.urls) {
+  urls[k] = urls_app.urls[k];
+}
+for(k in urls_juego.urls) {
+  urls[k] = urls_juego.urls[k];
+}
 
 var app = http.createServer(function(request, response) {
   u.manejadorURL(request, response, urls);
@@ -21,7 +29,7 @@ io.on('connection', function(socket){
     i++;
   }
 
-  if(encontrado) {    
+  if(encontrado) {
     modelo.tabla_linea.agregar(" WHERE nombre="  + '"archivito"' , 'archivito-linea', socket);
     modelo.tabla_rect.agregar(" WHERE nombre="  + '"archivito"' , 'archivito-rect', socket);
   }

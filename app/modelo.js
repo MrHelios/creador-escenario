@@ -6,11 +6,6 @@ database.crearDatabase();
 var tabla_archivos = new db.Tabla('archivo', database.db);
 tabla_archivos.agregarValores('nombre', 'TEXT');
 tabla_archivos.crearTabla();
-/*
-tabla_archivos.insertar({'nombre': '"hola"'});
-tabla_archivos.insertar({'nombre': '"chauchas"'});
-tabla_archivos.insertar({'nombre': '"jeje"'});
-*/
 
 var tabla_rect = new db.Tabla('rect', database.db);
 tabla_rect.agregarValores('nombre', 'VARCHAR(255)');
@@ -29,7 +24,7 @@ tabla_linea.agregarValores('xf','INTEGER');
 tabla_linea.agregarValores('yf','INTEGER');
 tabla_linea.crearTabla();
 
-var conexion_db = function(data) {  
+var conexion_db = function(data) {
 
   for(var i=0; i<data.length; i++) {
     if(data[i].accion == 'agregar') {

@@ -2,7 +2,7 @@ var template = require('./template');
 
 var manejadorURL = function(request, response, urls) {
   // Para HTML
-  if( request.url in urls.urls ) urls.urls[request.url](request, response);
+  if( request.url in urls ) urls[request.url](request, response);
   // Para otros archivos estaticos.
   else if(request.url.indexOf('.js') != -1 || request.url.indexOf('.css') != -1) {
     var dir = template.direccion(__dirname, request.url);
