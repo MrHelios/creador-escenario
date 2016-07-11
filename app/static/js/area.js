@@ -71,8 +71,7 @@ function Escenario(cvs,xi,yi,xf,yf,multi) {
 
     for(var i=i0; i<ifinal; i++) {
       for(var j=j0; j<jfinal; j++) {
-        this.obtenerPos(i,j).dibujar();
-        console.log(this.grilla[i][j]);
+        this.obtenerPos(i,j).dibujar();        
       }
     }
   }

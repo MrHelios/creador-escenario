@@ -1,0 +1,20 @@
+{
+  "name": "creador-escenario",
+  "version": "1.0.0",
+  "description": "*Escenario-Creador: Version 0.0.1* *Clases y metodos en el escenario-creador.* *Con sus parametros y retornos.*",
+  "main": "server.js",
+  "dependencies": {
+    "socket.io": "^1.4.8",
+    "sqlite3": "^3.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

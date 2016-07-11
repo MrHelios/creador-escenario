@@ -33,7 +33,7 @@ function Oyente(canvas) {
 
     // Esto se realiza en el area-tablero.
     // Verifica si el primer click en el tablero tiene algun objeto seleccionado.
-    if(inteligencia.permitirDibujo(escenario,self.activo,u.x,u.y) && inteligencia.teclaCorrecta(self.tecla)) {      
+    if(inteligencia.permitirDibujo(escenario,self.activo,u.x,u.y) && inteligencia.teclaCorrecta(self.tecla)) {
       inteligencia.empezarDibujo(obj,self.ID,u.x,u.y,self.movmousex,self.movmousey,self.tecla);
       self.activo = inteligencia.opuesto(self.activo);
     }
@@ -106,14 +106,19 @@ function Oyente(canvas) {
 
       if( Area.prototype.estaEnEscenario(p.x, p.y, escenario)) {
         monitor_obj.dibujarTodo();
-        obj.dibujarTodo();
-        // Hay que revisar, no renderiza bien la imagen.
-        //obj.dibujarOpt(p.x/10 - 20,p.y/10 - 20,p.x/10 + 20,p.y/10 + 20);
+
+        // En caso de que la grilla sea mas grande que el valor default, se utilizara el metodo optimo.
+        if( escenario.long != 1000) obj.dibujarOpt(p.x/10 - 20,p.y/10 - 20,p.x/10 + 20,p.y/10 + 20);
+        else obj.dibujarTodo();
       }
+
       else {
         monitor_obj.dibujarTodo();
-        obj.dibujarTodo();
+
+        if( escenario.long != 1000) obj.dibujarOpt(p.x/10 - 20,p.y/10 - 20,p.x/10 + 20,p.y/10 + 20);
+        else obj.dibujarTodo();
       }
+
     }
   }
 
