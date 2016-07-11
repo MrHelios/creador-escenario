@@ -23,13 +23,18 @@
 </head>
 <body>
   <div class="main">
-    <canvas id="canvas" width="{{canvas-long}}" height="{{canvas-alt}}">
+    <canvas id="canvas" >
     </canvas>
 
     <!-- Creador -->
     <script>
-      var activo = false;
+
+      // Establezco las dimensiones para el canvas.
       var cvs = "canvas";
+      document.getElementById(cvs).setAttribute('width','1000');
+      document.getElementById(cvs).setAttribute('height','800');
+
+      var activo = false;
       var nombre_archivo_mapa = {{nombre}};
       var tablero = new Tablero(cvs);
       // ACA SE ARMA EL ESCENARIO.

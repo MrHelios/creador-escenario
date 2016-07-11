@@ -29,7 +29,7 @@ function Tabla(nombre, db) {
       }
       s = s.substring(0,s.length-1);
       s += ')';
-      console.log(s);
+      //console.log(s);
       self.db.run('CREATE TABLE IF NOT EXISTS ' + self.nombre + ' ' + s);
     });
   }
@@ -37,7 +37,6 @@ function Tabla(nombre, db) {
   this.insertar = function(valores) {
     var s = Tabla.prototype.acomodarINSERT(valores);
 
-    //console.log('INSERT INTO ' + this.nombre + ' VALUES ' + s);
     console.log('Te estas ejecutando?');
     this.db.run('INSERT INTO ' + this.nombre + ' VALUES ' + s);
   }

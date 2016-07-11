@@ -1,0 +1,9 @@
+.nada {
+  list-style-type: none;
+  margin: 3px;
+}
+#cajaBusqueda {
+  float: left;
+  width: 350px;
+  height: 180px;
+}

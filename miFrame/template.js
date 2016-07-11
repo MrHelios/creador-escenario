@@ -11,7 +11,7 @@ render = function(direccion, response, cambiar, adicional) {
     else {
       // Solo para index.
       if(adicional && 'templates' in cambiar) {
-        for(k in cambiar) {          
+        for(k in cambiar) {
           data = Templates.prototype.agregarArchivo(data, cambiar[k], adicional);
         }
       }
@@ -34,8 +34,7 @@ Templates.prototype.agregarArchivo = function(data, palabra, reemplazar) {
     while(html.indexOf(palabra) != -1) html = html.replace(palabra, reemplazar);
   }
   else {
-    var s = html.indexOf(palabra);
-    console.log(reemplazar);
+    var s = html.indexOf(palabra);    
     for(var k in reemplazar) {
       html = html.substring(0,s) + reemplazar[k] + html.substring(s, html.length);
     }

@@ -1,25 +1,16 @@
 <html>
 <head>
   <title>Index</title>
-  <style>
-  .nada {
-    list-style-type: none;
-    margin: 3px;
-  }
-  </style>
+
+  <link rel="stylesheet" type="text/css" href="/app/static/css/index.css">
 </head>
 
 <body>
   <h1>Index</h1>
 
-  <div id="seccionArchivo">
+  <a href="/juego">Ir al Juego</a>
 
-    <div id="cajaBusqueda">
-    <h2>Archivos en la base de datos</h2>
-    <ul>
-      {{templates}}
-    </ul>
-    </div>
+  <div id="seccionArchivo">
 
     <div id="cajaBusqueda">
     <h2>Ir a la seccion de creacion</h2>
@@ -28,9 +19,16 @@
         <li class="nada">Nombre <input type="text" name="archivo"></li>
         <li class="nada">Longitud <input type="text" name="long"></li>
         <li class="nada">Altura <input type="text" name="altura"></li>
-        <li class="nada"><input type="submit" value="Buscar"></li>
+        <li class="nada"><input type="submit" value="Crear"></li>
       <ul>
       </form>
+    </div>
+
+    <div id="cajaBusqueda">
+    <h2>Archivos en la base de datos</h2>
+    <ul>
+      {{templates}}
+    </ul>
     </div>
 
   </div>
