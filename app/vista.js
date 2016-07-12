@@ -2,7 +2,8 @@ var miframe = require('../miFrame/template.js');
 var vista = require('./modelo.js');
 
 index = function(request, response) {
-  vista.tabla_archivos.buscarTODO('',[miframe.render, __dirname + '/static/index.html', response, {'templates': '{{templates}}'}]);
+  console.log(__dirname + '/static/index.html');
+  vista.tabla_archivos.buscarTODO('',[miframe.render, miframe.direccion(__dirname, '/static/index.html'), response, {'templates': '{{templates}}'}]);
 }
 
 creador = function(request, response) {
@@ -15,8 +16,8 @@ creador = function(request, response) {
     request.on('data', function(chunk) {
       dicc = creadorPOST(chunk);
 
-      vista.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , vista.tabla_archivos, {'nombre': dicc.archivo});      
-      miframe.render(__dirname + '/static/creador.html', response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}','canvas-long':'{{canvas-long}}','canvas-alt':'{{canvas-alt}}'}, dicc);
+      vista.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , vista.tabla_archivos, {'nombre': dicc.archivo});
+      miframe.render(miframe.direccion(__dirname, '/static/creador.html'), response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}','canvas-long':'{{canvas-long}}','canvas-alt':'{{canvas-alt}}'}, dicc);
     })
   }
 }

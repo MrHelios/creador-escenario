@@ -1,5 +1,9 @@
 actualizacion = function() {
-  tablero.limpiar();
+
+  // Mientras la serpiente este viva el juego seguira.
+  if(!victoria) clearInterval(jugando);
+
+  Tablero.prototype.limpiar(tablero);
 
   // Dibujo la serpiente.
   for(var i=0; i<serpiente.obtenerCant();i++) {
@@ -10,8 +14,8 @@ actualizacion = function() {
         // Verificamos la nueva posicion.
         var puntoi = serpiente.obtenerPos(0).obtenerPI();
         var pos_actual = esc.obtenerPos(puntoi.obtenerX()/5,puntoi.obtenerY()/5)
-        if(pos_actual.obtenerPared()) victoria=false;
-        else if(pos_actual.obtenerManzana()) {
+        if(!victoria && pos_actual.obtenerPared()) victoria=false;
+        else if(!victoria && pos_actual.obtenerManzana()) {
           // Removemos la posicion actual de la manzana.
           var pos = pos_actual.obtenerObjManzana();
           pos_actual.desactivarManzana();
@@ -54,6 +58,4 @@ actualizacion = function() {
     manzanas.obtenerPos(i).dibujar();
   }
 
-  // Mientras la serpiente este viva el juego seguira.
-  if(victoria) setTimeout(actualizacion,50);
 }

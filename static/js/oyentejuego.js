@@ -1,5 +1,4 @@
-
-function Oyente() {
+function OyenteJuego() {
   this.escucharTeclado = function() {
     window.addEventListener("keydown",this.apretarTecla,false);
   }

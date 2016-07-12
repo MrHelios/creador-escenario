@@ -2,28 +2,26 @@
 <head>
   <title>Juego Serpiente + Javascript</title>
 
-  <link rel="stylesheet" type="text/css" href="/juego/static/css/serpiente.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/serpiente.css">
 </head>
 
 <body>
   <canvas id="canvas">
   </canvas>
 
-  <script src="/juego/static/js/tablero.js"></script>
-  <script src="/juego/static/js/punto.js"></script>
-  <script src="/juego/static/js/linea.js"></script>
-  <script src="/juego/static/js/linea_mov.js"></script>
-  <script src="/juego/static/js/circulo.js"></script>
-  <script src="/juego/static/js/coleccion.js"></script>
-  <script src="/juego/static/js/oyente.js"></script>
-  <script src="/juego/static/js/actualizador.js"></script>
-  <script src="/juego/static/js/escenario.js"></script>
-  <script src="/juego/static/js/objetos.js"></script>
-  <script src="/juego/static/js/manzana.js"></script>
+  <script src="/static/js/tablero.js"></script>
+  <script src="/static/js/punto.js"></script>
+  <script src="/static/js/linea.js"></script>
+  <script src="/static/js/linea_mov.js"></script>
+  <script src="/static/js/circulo.js"></script>
+  <script src="/static/js/coleccion.js"></script>
+  <script src="/static/js/oyentejuego.js"></script>
+  <script src="/static/js/actualizador.js"></script>
+  <script src="/static/js/escenario.js"></script>
+  <script src="/static/js/objetos.js"></script>
+  <script src="/static/js/manzana.js"></script>
 
   <script type="text/javascript">
-
-
     // Establezco las dimensiones para el canvas.
     var cvs = "canvas";
     document.getElementById(cvs).setAttribute('width','400');
@@ -44,13 +42,13 @@
     var punto = new Punto(cvs,50,200);
     var punto2 = new Punto(cvs,50,205);
     var linea = new Linea_Mov(cvs,punto,punto2);
-    var serpiente = new Coleccion(10);
+    var serpiente = new coleccionCriaturas();
     serpiente.insertar(linea);
     serpiente.extender(serpiente);
 
     var punto3 = new Punto(cvs,100,100);
     var manzana = new Manzana(cvs,3,punto3);
-    var manzanas = new Coleccion(3);
+    var manzanas = new coleccionCriaturas();
 
     for(var i=0; i<3; i++) {
       manzanas.insertar(manzana.clone());
@@ -63,11 +61,11 @@
       esc.obtenerPos(x/5,y/5).establecerManzana(i);
     }
 
-    o = new Oyente();
+    o = new OyenteJuego();
     o.escucharTeclado();
 
     actualizacion();
-
+    jugando = setInterval(actualizacion, 50);
   </script>
 
 </body>
