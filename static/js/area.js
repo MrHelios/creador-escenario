@@ -10,7 +10,7 @@ function Area(canvas,xi,yi,xf,yf) {
 
 // Verifica que el punto este entre los punto de vertices del area.
 Area.prototype.estaEnEscenario = function(px,py,area) {
-    return (area.xi<=px && (area.xf)>px && area.yi<=py && (area.yf)>py)
+    return (area.xi<=px && (area.xf + area.xi)>px && area.yi<=py && (area.yf + area.yi)>py)
   }
 
 Area.prototype.pintar = function(area) {
@@ -42,9 +42,7 @@ function Escenario(cvs,xi,yi,xf,yf,multi) {
   this.columna = this.yf/this.multiplicador;
 
   var p = new Punto(this.ID,(this.fila_inicio-1)*10,(this.columna_inicio-1)*10);
-  var l = ((this.fila-this.fila_inicio)*this.multiplicador);
-  var a = ((this.columna-this.columna_inicio)*this.multiplicador)
-  this.limites = new Rectangulo(this.ID,p,l+10,a+10);
+  this.limites = new Rectangulo(this.ID,p,this.xf,this.yf);
 
   this.grilla = new Array();
   for(var i=0;i<=this.fila;i++) {
@@ -54,35 +52,38 @@ function Escenario(cvs,xi,yi,xf,yf,multi) {
   this.establecerPos = function(i,j,obj) {
     this.grilla[i][j] = obj;
   }
+
   this.dibujar = function() {
-    for(var i=this.fila_inicio; i<this.fila; i++) {
-      for(var j=this.columna_inicio; j<this.columna; j++) {
+    for(var i=0; i<this.fila; i++) {
+      for(var j=0; j<this.columna; j++) {
         this.obtenerPos(i,j).dibujar();
       }
     }
   }
 
   this.dibujarParte = function(i0,j0,ifinal,jfinal) {
-    if(i0<this.fila_inicio) i0=this.fila_inicio;
+    if(i0<0) i0=this.fila_inicio;
     else if(ifinal>this.fila) ifinal=this.fila;
 
-    if(j0<this.columna_inicio) j0=this.columna_inicio;
+    if(j0<0) j0=this.columna_inicio;
     else if(jfinal>this.columna) jfinal=this.columna;
 
     for(var i=i0; i<ifinal; i++) {
       for(var j=j0; j<jfinal; j++) {
-        this.obtenerPos(i,j).dibujar();        
+        this.obtenerPos(i,j).dibujar();
       }
     }
   }
+
   this.establecerGrilla = function() {
-    for(var i=this.fila_inicio; i<this.fila; i++){
-      for(var j=this.columna_inicio; j<this.columna; j++){
-        var punto = new Punto(cvs,i*this.multiplicador,j*this.multiplicador);
+    for(var i=0; i<this.fila; i++){
+      for(var j=0; j<this.columna; j++){
+        var punto = new Punto(cvs,i*this.multiplicador+150,j*this.multiplicador+60);
         this.establecerPos(i,j,new Circulo(cvs,1,punto));
       }
-    }
+    }    
   }
+
   this.redefinirLimites = function(xi,yi,long,alt) {
     this.limites = new Rectangulo(xi,yi,long*this.multiplicador,alt*this.multiplicador);
   }
