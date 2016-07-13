@@ -4,6 +4,7 @@ actualizacion = function() {
   if(!victoria) clearInterval(jugando);
 
   Tablero.prototype.limpiar(tablero);
+  muros.dibujarTodo();
 
   // Dibujo la serpiente.
   for(var i=0; i<serpiente.obtenerCant();i++) {
@@ -13,7 +14,7 @@ actualizacion = function() {
 
         // Verificamos la nueva posicion.
         var puntoi = serpiente.obtenerPos(0).obtenerPI();
-        var pos_actual = esc.obtenerPos(puntoi.obtenerX()/5,puntoi.obtenerY()/5)
+        var pos_actual = esc.obtenerPos(puntoi.obtenerX(),puntoi.obtenerY())
         if(victoria && pos_actual.obtenerPared()) victoria=false;
         else if(victoria && pos_actual.obtenerManzana()) {
           // Removemos la posicion actual de la manzana.
@@ -27,8 +28,8 @@ actualizacion = function() {
           // Agregamos la nueva posicion.
           var x = manzanas.obtenerPos(pos).obtenerCentro().obtenerX();
           var y = manzanas.obtenerPos(pos).obtenerCentro().obtenerY();
-          esc.obtenerPos(x/5,y/5).activarManzana();
-          esc.obtenerPos(x/5,y/5).establecerManzana(pos);
+          esc.obtenerPos(x,y).activarManzana();
+          esc.obtenerPos(x,y).establecerManzana(pos);
         }
       }
     else {

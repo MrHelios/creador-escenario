@@ -1,8 +1,10 @@
-function Escenario(canvas) {
+function Escenario(canvas, multi) {
   Tablero.call(this,canvas);
 
-  var fila = this.obtenerLong()/5;
-  var columna = this.obtenerAltura()/5;
+  this.multiplicador = multi || 1;
+
+  var fila = this.obtenerLong()/this.multiplicador;
+  var columna = this.obtenerAltura()/this.multiplicador;
 
   this.grilla = new Array(fila);
   for(var i=0;i<=fila;i++) {
@@ -14,6 +16,6 @@ function Escenario(canvas) {
   }
 
   this.obtenerPos = function(i,j) { return this.grilla[i][j];}
-  this.fila = function() { return this.obtenerLong()/5;}
-  this.columna = function() { return this.obtenerAltura()/5;}
+  this.fila = function() { return this.obtenerLong()/this.multiplicador;}
+  this.columna = function() { return this.obtenerAltura()/this.multiplicador;}
 }

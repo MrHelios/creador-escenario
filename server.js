@@ -22,6 +22,7 @@ var io = require('socket.io')(app);
 
 io.on('connection', function(socket){
   // Guarda la informacion.
+  // REVIDAR ESTO!!!!!
   var i=0;
   var encontrado=false;
   while(i<socket.request['rawHeaders'].length && !encontrado) {

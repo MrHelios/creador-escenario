@@ -3,15 +3,12 @@
   <title>Juego Serpiente + Javascript</title>
 
   <link rel="stylesheet" type="text/css" href="/static/css/serpiente.css">
-</head>
 
-<body>
-  <canvas id="canvas">
-  </canvas>
-
+  <!-- Motor grafico -->
   <script src="/static/js/tablero.js"></script>
   <script src="/static/js/punto.js"></script>
   <script src="/static/js/linea.js"></script>
+  <script src="/static/js/rectangulo.js"></script>
   <script src="/static/js/linea_mov.js"></script>
   <script src="/static/js/circulo.js"></script>
   <script src="/static/js/coleccion.js"></script>
@@ -21,21 +18,32 @@
   <script src="/static/js/objetos.js"></script>
   <script src="/static/js/manzana.js"></script>
 
+  <!-- Conexion con el server -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/static/js/conexion.js"></script>
+</head>
+
+<body>
+  <canvas id="canvas">
+  </canvas>
+
   <script type="text/javascript">
     // Establezco las dimensiones para el canvas.
     var cvs = "canvas";
-    document.getElementById(cvs).setAttribute('width','400');
-    document.getElementById(cvs).setAttribute('height','400');
+    var longitud_max = 400;
+    var altura_max = 400;
+    document.getElementById(cvs).setAttribute('width',"" + longitud_max);
+    document.getElementById(cvs).setAttribute('height',"" + altura_max);
     var victoria=true;
 
     var tablero = new Tablero(cvs);
     var esc = new Escenario(cvs);
     var obj = new Objetos();
+    var muros = new Coleccion();
 
     for(var i=0, fila=esc.fila(); i<=fila; i++) {
       for(var j=0, columna=esc.columna(); j<=columna; j++) {
           esc.establecerPos(i,j,obj.clone());
-          if(i==0 || i==fila || j==0 || j==columna) esc.obtenerPos(i,j).activarPared();
       }
     }
 
@@ -57,12 +65,17 @@
 
       var x = manzanas.obtenerPos(i).obtenerCentro().obtenerX();
       var y = manzanas.obtenerPos(i).obtenerCentro().obtenerY();
-      esc.obtenerPos(x/5,y/5).activarManzana();
-      esc.obtenerPos(x/5,y/5).establecerManzana(i);
+      esc.obtenerPos(x,y).activarManzana();
+      esc.obtenerPos(x,y).establecerManzana(i);
     }
 
     o = new OyenteJuego();
     o.escucharTeclado();
+
+    var nombre_level1 = 'archivito';
+    var socket = new Socket();
+    socket.onLevelLinea(nombre_level1 + '-linea');
+    socket.onLevelRect(nombre_level1 + '-rect');
 
     actualizacion();
     jugando = setInterval(actualizacion, 50);
