@@ -33,7 +33,7 @@ Area.prototype.colorear = function(area, color) {
 function Escenario(cvs,xi,yi,xf,yf,multi) {
   Area.call(this,cvs,xi,yi,xf,yf);
 
-  this.multiplicador = 10;
+  this.multiplicador = multi || 10;
   // xi: 15
   this.fila_inicio = this.xi/this.multiplicador;
   // yi: 6
@@ -81,7 +81,7 @@ function Escenario(cvs,xi,yi,xf,yf,multi) {
         var punto = new Punto(cvs,i*this.multiplicador+150,j*this.multiplicador+60);
         this.establecerPos(i,j,new Circulo(cvs,1,punto));
       }
-    }    
+    }
   }
 
   this.redefinirLimites = function(xi,yi,long,alt) {

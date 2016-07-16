@@ -1,3 +1,7 @@
+/*
+FALTA Documentacion.
+*/
+
 function Objetos() {
   this.pared = false;
   this.serpiente = false;

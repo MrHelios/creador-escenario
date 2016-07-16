@@ -9,14 +9,12 @@
   <script src="/static/js/punto.js"></script>
   <script src="/static/js/linea.js"></script>
   <script src="/static/js/rectangulo.js"></script>
-  <script src="/static/js/linea_mov.js"></script>
   <script src="/static/js/circulo.js"></script>
   <script src="/static/js/coleccion.js"></script>
-  <script src="/static/js/oyentejuego.js"></script>
+  <script src="/static/js/oyente.js"></script>
   <script src="/static/js/actualizador.js"></script>
-  <script src="/static/js/escenario.js"></script>
+  <script src="/static/js/area.js"></script>
   <script src="/static/js/objetos.js"></script>
-  <script src="/static/js/manzana.js"></script>
 
   <!-- Conexion con el server -->
   <script src="/socket.io/socket.io.js"></script>
@@ -32,17 +30,17 @@
     var cvs = "canvas";
     var longitud_max = 400;
     var altura_max = 400;
-    document.getElementById(cvs).setAttribute('width',"" + longitud_max);
-    document.getElementById(cvs).setAttribute('height',"" + altura_max);
+    Tablero.prototype.setAtributo(cvs, longitud_max, altura_max)
     var victoria=true;
 
     var tablero = new Tablero(cvs);
-    var esc = new Escenario(cvs);
+    var esc = new Escenario(cvs,0,0,400,400,1);    
+
     var obj = new Objetos();
     var muros = new Coleccion();
 
-    for(var i=0, fila=esc.fila(); i<=fila; i++) {
-      for(var j=0, columna=esc.columna(); j<=columna; j++) {
+    for(var i=0, fila=esc.fila; i<=fila; i++) {
+      for(var j=0, columna=esc.columna; j<=columna; j++) {
           esc.establecerPos(i,j,obj.clone());
       }
     }

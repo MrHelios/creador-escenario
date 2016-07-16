@@ -17,3 +17,8 @@ Tablero.prototype.limpiar = function(tablero) {
   tablero.lienzo.fillRect(0,0,tablero.long,tablero.altura);
   tablero.lienzo.stroke();
 }
+
+Tablero.prototype.setAtributo = function(id, longitud, altura) {
+  document.getElementById(id).setAttribute('width',"" + longitud);
+  document.getElementById(id).setAttribute('height',"" + altura);
+}
