@@ -14,7 +14,8 @@ actualizacion = function() {
 
         // Verificamos la nueva posicion.
         var puntoi = serpiente.obtenerPos(0).obtenerPI();
-        var pos_actual = esc.obtenerPos(puntoi.obtenerX(),puntoi.obtenerY())
+        var pos_actual = esc.obtenerPos(puntoi.obtenerX()/esc.multiplicador, puntoi.obtenerY()/esc.multiplicador);
+
         if(victoria && pos_actual.obtenerPared()) victoria=false;
         else if(victoria && pos_actual.obtenerManzana()) {
           // Removemos la posicion actual de la manzana.
@@ -28,8 +29,8 @@ actualizacion = function() {
           // Agregamos la nueva posicion.
           var x = manzanas.obtenerPos(pos).obtenerCentro().obtenerX();
           var y = manzanas.obtenerPos(pos).obtenerCentro().obtenerY();
-          esc.obtenerPos(x,y).activarManzana();
-          esc.obtenerPos(x,y).establecerManzana(pos);
+          esc.obtenerPos(x/esc.multiplicador, y/esc.multiplicador).activarManzana();
+          esc.obtenerPos(x/esc.multiplicador, y/esc.multiplicador).establecerManzana(pos);
         }
       }
     else {

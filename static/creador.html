@@ -9,7 +9,6 @@
   <script src="/static/js/punto.js"></script>
   <script src="/static/js/circulo.js"></script>
   <script src="/static/js/linea.js"></script>
-  <script src="/static/js/monitor.js"></script>
   <script src="/static/js/oyente.js"></script>
   <script src="/static/js/ia.js"></script>
   <script src="/static/js/coleccion.js"></script>
@@ -25,13 +24,14 @@
   <div class="main">
     <canvas id="canvas" >
     </canvas>
+    <a href="/">Volver a Index</a>
 
     <!-- Creador -->
     <script>
 
       // Establezco las dimensiones para el canvas.
       var cvs = "canvas";
-      Tablero.prototype.setAtributo(cvs, '1000', '800');      
+      Tablero.prototype.setAtributo(cvs, '1000', '500');
 
       var activo = false;
       var nombre_archivo_mapa = {{nombre}};

@@ -62,12 +62,23 @@ function Socket() {
         El +10 es una correccion manual que aplicamos.
         */
         var i = data[k].xi, final = data[k].l + i;
-        var j = data[k].yi+10, finalj = data[k].a + j;
+        var j = data[k].yi, finalj = data[k].a + j;
 
-        while(i<final) {
-          esc.obtenerPos(i,j).activarPared();
-          esc.obtenerPos(i,finalj).activarPared();
-          i+=5;
+
+
+        if(data[k].l>=0) {
+          while(i<final) {
+            esc.obtenerPos(i/esc.multiplicador,j/esc.multiplicador).activarPared();
+            esc.obtenerPos(i/esc.multiplicador,finalj/esc.multiplicador).activarPared();
+            i+=5;
+          }
+        }
+        else {
+          while(i>final) {
+            esc.obtenerPos(i/esc.multiplicador,j/esc.multiplicador).activarPared();
+            esc.obtenerPos(i/esc.multiplicador,finalj/esc.multiplicador).activarPared();
+            i-=5;
+          }
         }
 
         /*
@@ -76,13 +87,22 @@ function Socket() {
         */
         var i = data[k].xi, final = data[k].l + i;
 
-        while(j<finalj) {
-          esc.obtenerPos(i,j).activarPared();
-          esc.obtenerPos(final,j).activarPared();
-          j+=5;
+        if(data[k].a>=0) {
+          while(j<finalj) {
+            esc.obtenerPos(i/esc.multiplicador,j/esc.multiplicador).activarPared();
+            esc.obtenerPos(final/esc.multiplicador,j/esc.multiplicador).activarPared();
+            j+=5;
+          }
+        }
+        else {
+          while(j>finalj) {
+            esc.obtenerPos(i/esc.multiplicador,j/esc.multiplicador).activarPared();
+            esc.obtenerPos(final/esc.multiplicador,j/esc.multiplicador).activarPared();
+            j-=5;
+          }
         }
 
-        muros.insertar(new Rectangulo(cvs, new Punto(cvs, data[k].xi, data[k].yi + 10), data[k].l, data[k].a));
+        muros.insertar(new Rectangulo(cvs, new Punto(cvs, data[k].xi, data[k].yi), data[k].l, data[k].a));
       }
 
     });
@@ -101,22 +121,36 @@ function Socket() {
         var i = data[k].xi, final = data[k].xf;
         var j = data[k].yi, finalj = data[k].yf;
 
-        while(i<final) {
-          esc.obtenerPos(i,j).activarPared();
-          esc.obtenerPos(i,finalj).activarPared();
-          i+=5;
+        if(i<=final) {
+          while(i<final) {
+            esc.obtenerPos(i/esc.multiplicador, j/esc.multiplicador).activarPared();
+            i+=5;
+          }
+        }
+        else {
+          while(i>final) {
+            esc.obtenerPos(i/esc.multiplicador, j/esc.multiplicador).activarPared();
+            i-=5;
+          }
         }
 
         /*
         Logitud: xi - xf
         Crea la pared a traves de la altura.
         */
-        var i = data[k].xi, final = data[k].yf;
+        var i = data[k].xi;
 
-        while(j<finalj) {
-          esc.obtenerPos(i,j).activarPared();
-          esc.obtenerPos(final,j).activarPared();
-          j+=5;
+        if(j<=final) {
+          while(j<finalj) {
+            esc.obtenerPos(i/esc.multiplicador, j/esc.multiplicador).activarPared();
+            j+=5;
+          }
+        }
+        else {
+          while(j>finalj) {
+            esc.obtenerPos(i/esc.multiplicador, j/esc.multiplicador).activarPared();
+            j-=5;
+          }
         }
 
         muros.insertar(new Linea(cvs, new Punto(cvs, data[k].xi, data[k].yi), new Punto(cvs, data[k].xf, data[k].yf)));
@@ -207,7 +241,7 @@ Socket.prototype.comparar = function(nuevo, database) {
       comp.push(nuevo[i]);
     }
   }
-
+  console.log(comp);
   return comp;
 }
 

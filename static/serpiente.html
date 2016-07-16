@@ -24,6 +24,7 @@
 <body>
   <canvas id="canvas">
   </canvas>
+  <a href="/">Volver a Index</a>
 
   <script type="text/javascript">
     // Establezco las dimensiones para el canvas.
@@ -34,7 +35,8 @@
     var victoria=true;
 
     var tablero = new Tablero(cvs);
-    var esc = new Escenario(cvs,0,0,400,400,1);    
+    //var esc = new Escenario(cvs,0,0,400,400,1);
+    var esc = new Escenario(cvs,0,0,400,400,5);
 
     var obj = new Objetos();
     var muros = new Coleccion();
@@ -63,8 +65,8 @@
 
       var x = manzanas.obtenerPos(i).obtenerCentro().obtenerX();
       var y = manzanas.obtenerPos(i).obtenerCentro().obtenerY();
-      esc.obtenerPos(x,y).activarManzana();
-      esc.obtenerPos(x,y).establecerManzana(i);
+      esc.obtenerPos(x/esc.multiplicador,y/esc.multiplicador).activarManzana();
+      esc.obtenerPos(x/esc.multiplicador,y/esc.multiplicador).establecerManzana(i);
     }
 
     o = new OyenteJuego();
