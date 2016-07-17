@@ -9,6 +9,10 @@ function Oyente(canvas) {
   this.movmousex = 0;
   this.movmousey = 0;
 
+  // Posicion absoluta del tablero.
+  this.tableroX = 0;
+  this.tableroY = 46;
+
   this.seleccion_objeto = -1;
   this.seleccion_enlace = -1;
 
@@ -32,7 +36,7 @@ function Oyente(canvas) {
   }
 
   this.click = function(event) {
-    var u = inteligencia.reubicar(event.x,event.y);
+    var u = inteligencia.reubicar(event.x - self.tableroX,event.y - self.tableroY);
 
     // Esto se realiza en el area-tablero.
     // Verifica si el primer click en el tablero tiene algun objeto seleccionado.
@@ -53,7 +57,7 @@ function Oyente(canvas) {
 
     // Esto se realiza en el area-monitor.
     else if(inteligencia.permitirDibujo(monitor_objetos,self.activo,u.x,u.y)) {
-      var i = inteligencia.seleccionEnlace(monitor_obj,event.x,event.y);
+      var i = inteligencia.seleccionEnlace(monitor_obj,event.x - self.tableroX,event.y - self.tableroY);
       var dir;
       if(i != -1){
         dir = inteligencia.obtenerObjetoEnlace(monitor_obj,obj,i);
@@ -77,7 +81,7 @@ function Oyente(canvas) {
     }
 
     // Para guarda la informacion en la base de datos.
-    else if(!self.activo && Area.prototype.estaEnEscenario(event.x, event.y, menu_servidor)) {
+    else if(!self.activo && Area.prototype.estaEnEscenario(event.x - self.tableroX, event.y - self.tableroY, menu_servidor)) {
 
       var recolectado = Socket.prototype.recolectar(monitor_obj.objetos);
       var comparar = Socket.prototype.comparar(recolectado, socket.ultimo_enviado);
@@ -88,8 +92,8 @@ function Oyente(canvas) {
   }
 
   this.movMouse = function(event) {
-    self.movmousex = event.clientX;
-    self.movmousey = event.clientY;
+    self.movmousex = event.clientX - self.tableroX;
+    self.movmousey = event.clientY - self.tableroY;
 
     // Movimiento de la linea.
     if(self.activo) {

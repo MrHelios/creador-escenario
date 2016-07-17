@@ -253,4 +253,4 @@ Socket.prototype.enviar = function(objeto,s) {
 
 // Distancia del creador de escenario
 Socket.prototype.dmx = 140;
-Socket.prototype.dmy = 60;
+Socket.prototype.dmy = 50;

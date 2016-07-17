@@ -21,10 +21,17 @@
   <script src="/static/js/conexion.js"></script>
 </head>
 <body>
+
   <div class="main">
+    <ul id="navegacion-ul">
+      <li id="navegacion-li"><a href="/">Indice</a></li>
+      <li id="navegacion-li"><a>Test</a></li>
+      <li id="navegacion-li"><a href="/juego">Juego</a></li>      
+      <li id="navegacion-li"><a>Documentacion</a></li>
+    </ul>
+
     <canvas id="canvas" >
     </canvas>
-    <a href="/">Volver a Index</a>
 
     <!-- Creador -->
     <script>
@@ -50,7 +57,7 @@
       var inteligencia = new IA();
 
       var socket = new Socket();
-      socket.enviar('creador',nombre_archivo_mapa);
+      socket.enviar('obtener',nombre_archivo_mapa);
 
       socket.onLinea(nombre_archivo_mapa + '-linea');
       socket.onRect(nombre_archivo_mapa + '-rect');
@@ -66,6 +73,7 @@
       // Solo se ejecuta en la inicializacion.
       obj.dibujarTodo();
     </script>
+
   </div>
 </body>
 </html>

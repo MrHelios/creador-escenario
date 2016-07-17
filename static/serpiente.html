@@ -22,9 +22,15 @@
 </head>
 
 <body>
+
+  <ul>
+    <li><a href="/">Indice</a></li>
+    <li><a>Puntuacion</a></li>
+    <li><a>Documentacion</a></li>    
+  </ul>
+
   <canvas id="canvas">
   </canvas>
-  <a href="/">Volver a Index</a>
 
   <script type="text/javascript">
     // Establezco las dimensiones para el canvas.
@@ -74,6 +80,7 @@
 
     var nombre_level1 = 'archivito';
     var socket = new Socket();
+    socket.enviar('obtener',nombre_level1);
     socket.onLevelLinea(nombre_level1 + '-linea');
     socket.onLevelRect(nombre_level1 + '-rect');
 

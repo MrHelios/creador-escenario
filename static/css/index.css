@@ -1,18 +1,84 @@
-.nada {
-  list-style-type: none;
-  margin: 3px;
+/*
+  Fondo de la pagina HTML.
+  Remueve margenes y padding.
+*/
+html, body, .main {
+  margin: 0px;
+  padding: 0px;
+
 }
 
-#cajaAtributos {
-  
-}
+/*
+  Formularios.
+*/
 
-#cajaValores {
-
+#seccionArchivo {
+  position: absolute;
+  top: 10%;
+  left: 10%;
 }
 
 #cajaBusqueda {
   float: left;
   width: 350px;
   height: 280px;
+}
+
+input {
+  margin-bottom: 5px;
+  margin-left: 50px;
+}
+
+#contenedorForm {
+  width: 310px;
+  margin: 5px;
+  border: solid 1px black
+}
+
+#contenedorAtribForm {
+  margin-left: 10px;
+}
+
+#tituloForm {
+  margin-left: 60px;
+}
+
+#atribForm {
+  margin-left: 50px;
+}
+
+#botonForm {
+  border: solid 1px black;
+  background-color: blue;
+  margin-left: 90px;
+  color: white;
+  width: 75px;
+  height: 25px;
+}
+
+/*
+  Navegacion a otras paginas.
+*/
+#navegacion-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#navegacion-li {
+    float: left;
+}
+
+#navegacion-li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navegacion-li a:hover {
+    background-color: #111;
 }

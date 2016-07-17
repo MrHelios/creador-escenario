@@ -6,31 +6,37 @@
 </head>
 
 <body>
-  <h1>Index</h1>
 
-  <a href="/juego">Ir al Juego</a>
+    <ul id="navegacion-ul">
+      <li id="navegacion-li"><a href="/">Indice</a></li>
+      <li id="navegacion-li"><a href="/juego">Juego</a></li>
+      <li id="navegacion-li"><a>Documentacion</a></li>
+    </ul>
 
-  <div id="seccionArchivo">
+<div id="seccionArchivo">
 
     <div id="cajaBusqueda">
-    <h2>Ir a la seccion de creacion</h2>
+    <div id="contenedorForm">
+    <h2 id="tituloForm">Crea un archivo</h2>
       <form method="post" action="/creador">
-      <ul>
-        <li class="nada">Nombre <input type="text" name="archivo"></li>
-        <li class="nada">Longitud <input type="text" name="long"></li>
-        <li class="nada">Altura <input type="text" name="altura"></li>
-        <li class="nada"><input type="submit" value="Crear"></li>
-      </ul>
+        <div id="contenedorAtribForm">
+          <input id="atribForm" placeholder="Nombre" type="text" name="archivo"><br>
+          <input id="atribForm" placeholder="Longitud" type="text" name="long"><br>
+          <input id="atribForm" placeholder="Altura" type="text" name="altura"><br>
+          <input id="botonForm" type="submit" value="Crear">
+        </div>
       </form>
+    </div>
 
-
-    <h2>Buscar un archivo ya creado.</h2>
+    <div id="contenedorForm">
+    <h2 id="tituloForm">Busca un archivo</h2>
       <form method="post" action="/creador">
-      <ul>
-        <li class="nada">Nombre <input type="text" name="archivo"></li>
-        <li class="nada"><input type="submit" value="Buscar"></li>
-      </ul>
+        <div id="contenedorAtribForm">
+          <input placeholder="Nombre" type="text" name="archivo"><br>
+          <input id="botonForm" type="submit" value="Buscar">
+        </div>
       </form>
+    </div>
     </div>
 
     <div id="cajaBusqueda">

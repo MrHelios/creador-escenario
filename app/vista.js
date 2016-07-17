@@ -1,10 +1,14 @@
 var miframe = require('../miFrame/template.js');
 var modelo = require('./modelo.js');
 
+
 index = function(request, response) {
   modelo.tabla_archivos.buscarTODO('',[miframe.render, miframe.direccion(__dirname, '/static/index.html'), response, {'templates': '{{templates}}'}]);
 }
 
+/*
+  Vista donde se realizan los escenarios.
+*/
 creador = function(request, response) {
   if(request.method == 'GET') {
     response.write('Lo sentimos, pero a esta pagina no puedes acceder. :-)');

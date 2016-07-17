@@ -22,7 +22,7 @@ var io = require('socket.io')(app);
 
 io.on('connection', function(socket){
 
-  socket.on('creador',function(data) {    
+  socket.on('obtener',function(data) {    
     modelo.tabla_linea.agregar(" WHERE nombre="  + '"' + data + '"', data +'-linea', socket);
     modelo.tabla_rect.agregar(" WHERE nombre="  + '"' + data + '"', data +'-rect', socket);
   });

@@ -1,9 +1,46 @@
+/*
+  Fondo de la pagina HTML.
+  Remueve margenes y padding.
+*/
 html, body, .main {
   margin: 0px;
   padding: 0px;
+  background-color: white;
 }
 
+/*
+  Juego
+*/
+#canvas {  
+  background-color: white;
+  position:absolute;
+  top: 25%;
+  left: 25%;
+}
 
-#canvas {
-  border: 1px solid;
+/*
+  Navegacion
+*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
 }
