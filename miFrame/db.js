@@ -29,7 +29,6 @@ function Tabla(nombre, db) {
       }
       s = s.substring(0,s.length-1);
       s += ')';
-      //console.log(s);
       self.db.run('CREATE TABLE IF NOT EXISTS ' + self.nombre + ' ' + s);
     });
   }
@@ -37,14 +36,12 @@ function Tabla(nombre, db) {
   this.insertar = function(valores) {
     var s = Tabla.prototype.acomodarINSERT(valores);
 
-    console.log('Te estas ejecutando?');
     this.db.run('INSERT INTO ' + this.nombre + ' VALUES ' + s);
   }
 
   this.mostrar = function() {
     var s = Tabla.prototype.acomodarSELECT(this.valores);
 
-    //console.log('Mostrar:' + s);
     this.db.each('SELECT ' + s + ' FROM ' + this.nombre, function(err, fila) {
       if(err) console.log(err);
       else {
@@ -83,14 +80,31 @@ function Tabla(nombre, db) {
     });
   }
 
-  // Verifica si ya existe el archivo.
-  this.buscar = function(num, f, valor) {
+  /*
+    Verifica si ya existe el archivo.
+    En caso negativo lo agrega.
+  */
+  this.buscar = function(nombre, tipo, funcion, valor, respuesta) {
 
-    this.db.get('SELECT * FROM ' + this.nombre + num, function(err, fila) {
+    this.db.get('SELECT * FROM ' + this.nombre + nombre, function(err, fila) {
       if(err) console.log(err);
       else {
-        if(!fila) {
-          f.insertar(valor);
+        //  RESPUESTA: render, direccion HTML, respuesta server, datos, dicc.
+
+        if(!fila && tipo=='creacion') {
+          funcion.insertar(valor);
+          respuesta[0].render(respuesta[1], respuesta[2], respuesta[3], respuesta[4]);
+        }
+        else if(fila && tipo=='creacion') {
+          respuesta[2].write('El archivo que intenta crear ya existe.');
+          respuesta[2].end();
+        }
+        else if(!fila && tipo=='busqueda') {
+          respuesta[2].write('El archivo que intenta buscar no existe.');
+          respuesta[2].end();
+        }
+        else if(fila && tipo=='busqueda') {
+          respuesta[0].render(respuesta[1], respuesta[2], respuesta[3], respuesta[4]);
         }
       }
     });
@@ -100,7 +114,7 @@ function Tabla(nombre, db) {
     this.db.each('DELETE FROM ' + this.nombre + ' WHERE ' + num, function(err, fila) {
       if(err) console.log(err);
       else {
-        console.log('Eliminado.');
+        //console.log('Eliminado.');
       }
     });
   }

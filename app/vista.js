@@ -15,14 +15,24 @@ creador = function(request, response) {
     request.on('data', function(chunk) {
       dicc = creador.prototype.POST(chunk);
 
-      modelo.tabla_archivos.buscar(' WHERE nombre= ' + dicc.archivo , modelo.tabla_archivos, {'nombre': dicc.archivo});
-      miframe.render(miframe.direccion(__dirname, '/static/creador.html'), response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}','canvas-long':'{{canvas-long}}','canvas-alt':'{{canvas-alt}}'}, dicc);
-    })
+      var nombre = ' WHERE nombre= ' + dicc.archivo;
+      var tipo = dicc['tipo'];
+
+      // render, direccion HTML, respuesta server, datos, dicc.
+      if ((tipo=='creacion' && creador.prototype.esNumero(dicc['long']) && creador.prototype.esNumero(dicc['altura']) || tipo=='busqueda')) {
+        var respuesta = [miframe, miframe.direccion(__dirname, '/static/creador.html'), response, {'archivo': '{{nombre}}','long': '{{longitud}}','altura':'{{altura}}','canvas-long':'{{canvas-long}}','canvas-alt':'{{canvas-alt}}'}, dicc];
+        modelo.tabla_archivos.buscar(nombre, tipo, modelo.tabla_archivos, {'nombre': dicc.archivo}, respuesta);
+      }
+      else {
+        response.write('Los datos suministrados han sido erroneos.');
+        response.end();
+      }
+    });
   }
 }
 
 /*
-  Verifica si es una busqueda de creacion.
+  Verifica si es una busqueda o una creacion.
   Segun lo pedido retorna un diccionario.
 */
 creador.prototype.POST = function(chunk) {
@@ -65,6 +75,14 @@ creador.prototype.POST = function(chunk) {
     dicc['tipo'] = 'creacion';
     return dicc;
   }
+}
+
+/*
+  Verifica si es un Entero.
+*/
+creador.prototype.esNumero = function (valor) {
+  var x = parseFloat(valor);
+  return !isNaN(valor) && (x | 0) === x;
 }
 
 module.exports.index = index;
