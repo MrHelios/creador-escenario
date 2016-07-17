@@ -2,8 +2,6 @@
 function Socket() {
   this.socket = io();
   this.ultimo_enviado = [];
-
-
   self = this;
 
   // Recolecta el estado del archivo.
@@ -108,6 +106,10 @@ function Socket() {
     });
   }
 
+  this.enviar = function(destino, obj) {
+    this.socket.emit(destino,obj);
+  }
+
   // Se agregan elementos de lineas.
   // Funciona para la pagina juego.
   // Activamos pared.
@@ -162,7 +164,7 @@ function Socket() {
 }
 
 /*
-Al recolectar la informacion debe queda relativa.
+Al recolectar la informacion debe quedar relativa.
 */
 Socket.prototype.recolectar = function(objeto) {
   var enviar = [];
@@ -241,7 +243,6 @@ Socket.prototype.comparar = function(nuevo, database) {
       comp.push(nuevo[i]);
     }
   }
-  console.log(comp);
   return comp;
 }
 

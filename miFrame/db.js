@@ -83,13 +83,15 @@ function Tabla(nombre, db) {
     });
   }
 
-  // Lo utilizo para ver si ya existe el archivo.
+  // Verifica si ya existe el archivo.
   this.buscar = function(num, f, valor) {
 
     this.db.get('SELECT * FROM ' + this.nombre + num, function(err, fila) {
       if(err) console.log(err);
       else {
-        if(!fila) f.insertar(valor);
+        if(!fila) {
+          f.insertar(valor);
+        }
       }
     });
   }

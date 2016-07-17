@@ -50,6 +50,8 @@
       var inteligencia = new IA();
 
       var socket = new Socket();
+      socket.enviar('creador',nombre_archivo_mapa);
+
       socket.onLinea(nombre_archivo_mapa + '-linea');
       socket.onRect(nombre_archivo_mapa + '-rect');
 

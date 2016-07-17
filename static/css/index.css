@@ -2,8 +2,17 @@
   list-style-type: none;
   margin: 3px;
 }
+
+#cajaAtributos {
+  
+}
+
+#cajaValores {
+
+}
+
 #cajaBusqueda {
   float: left;
   width: 350px;
-  height: 180px;
+  height: 280px;
 }
