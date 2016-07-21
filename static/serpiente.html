@@ -6,15 +6,14 @@
 
   <!-- Motor grafico -->
   <script src="/static/js/tablero.js"></script>
+  <script src="/static/js/area.js"></script>
   <script src="/static/js/punto.js"></script>
   <script src="/static/js/linea.js"></script>
   <script src="/static/js/rectangulo.js"></script>
   <script src="/static/js/circulo.js"></script>
   <script src="/static/js/coleccion.js"></script>
   <script src="/static/js/oyente.js"></script>
-  <script src="/static/js/actualizador.js"></script>
-  <script src="/static/js/area.js"></script>
-  <script src="/static/js/objetos.js"></script>
+  <script src="/static/js/ia.js"></script>    
 
   <!-- Conexion con el server -->
   <script src="/socket.io/socket.io.js"></script>
@@ -26,7 +25,7 @@
   <ul>
     <li><a href="/">Indice</a></li>
     <li><a>Puntuacion</a></li>
-    <li><a>Documentacion</a></li>    
+    <li><a>Documentacion</a></li>
   </ul>
 
   <canvas id="canvas">
@@ -44,7 +43,7 @@
     //var esc = new Escenario(cvs,0,0,400,400,1);
     var esc = new Escenario(cvs,0,0,400,400,5);
 
-    var obj = new Objetos();
+    var obj = new IA_Objetos();
     var muros = new Coleccion();
 
     for(var i=0, fila=esc.fila; i<=fila; i++) {
@@ -84,8 +83,9 @@
     socket.onLevelLinea(nombre_level1 + '-linea');
     socket.onLevelRect(nombre_level1 + '-rect');
 
-    actualizacion();
-    jugando = setInterval(actualizacion, 50);
+    ia = new IA_Actualizador();
+    ia.actualizacion();
+    jugando = setInterval(ia.actualizacion, 50);
   </script>
 
 </body>

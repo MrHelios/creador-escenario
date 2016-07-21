@@ -27,21 +27,6 @@ render = function(direccion, response, cambiar, adicional) {
   })
 }
 
-Templates.prototype.agregarArchivo = function(data, palabra, reemplazar) {
-  html = "" + data;
-
-  if(typeof reemplazar == typeof "") {
-    while(html.indexOf(palabra) != -1) html = html.replace(palabra, reemplazar);
-  }
-  else {
-    var s = html.indexOf(palabra);    
-    for(var k in reemplazar) {
-      html = html.substring(0,s) + reemplazar[k] + html.substring(s, html.length);
-    }
-    html = html.replace(palabra, '');
-  }
-  return html;
-}
 
 // Para otro tipo. (CSS, JS, jpeg, json,etc)
 render_otro = function(direccion, response, tipo) {
@@ -70,6 +55,22 @@ var direccion = function(abs,archivo) {
 
 function Templates() {
   // Nada por ahora.
+}
+
+Templates.prototype.agregarArchivo = function(data, palabra, reemplazar) {
+  html = "" + data;
+
+  if(typeof reemplazar == typeof "") {
+    while(html.indexOf(palabra) != -1) html = html.replace(palabra, reemplazar);
+  }
+  else {
+    var s = html.indexOf(palabra);
+    for(var k in reemplazar) {
+      html = html.substring(0,s) + reemplazar[k] + html.substring(s, html.length);
+    }
+    html = html.replace(palabra, '');
+  }
+  return html;
 }
 
 module.exports.render = render;

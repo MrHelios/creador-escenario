@@ -10,11 +10,11 @@
   <script src="/static/js/circulo.js"></script>
   <script src="/static/js/linea.js"></script>
   <script src="/static/js/oyente.js"></script>
-  <script src="/static/js/ia.js"></script>
   <script src="/static/js/coleccion.js"></script>
   <script src="/static/js/rectangulo.js"></script>
   <script src="/static/js/area.js"></script>
   <script src="/static/js/enlace.js"></script>
+  <script src="/static/js/ia.js"></script>
 
   <!-- Conexion con el server -->
   <script src="/socket.io/socket.io.js"></script>
@@ -26,7 +26,7 @@
     <ul id="navegacion-ul">
       <li id="navegacion-li"><a href="/">Indice</a></li>
       <li id="navegacion-li"><a>Test</a></li>
-      <li id="navegacion-li"><a href="/juego">Juego</a></li>      
+      <li id="navegacion-li"><a href="/juego">Juego</a></li>
       <li id="navegacion-li"><a>Documentacion</a></li>
     </ul>
 
@@ -54,7 +54,10 @@
       Area.prototype.colorear(menu_servidor, 'red');
 
       var o = new Oyente(cvs);
+      
       var inteligencia = new IA();
+      var ia_dibujo = new IA_Dibujo();
+      var ia_enlace = new IA_Enlace();
 
       var socket = new Socket();
       socket.enviar('obtener',nombre_archivo_mapa);

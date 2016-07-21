@@ -40,13 +40,13 @@ function Oyente(canvas) {
 
     // Esto se realiza en el area-tablero.
     // Verifica si el primer click en el tablero tiene algun objeto seleccionado.
-    if(inteligencia.permitirDibujo(escenario,self.activo,u.x,u.y) && inteligencia.teclaCorrecta(self.tecla)) {
-      inteligencia.empezarDibujo(obj,self.ID,u.x,u.y,self.movmousex,self.movmousey,self.tecla);
-      self.activo = inteligencia.opuesto(self.activo);
+    if(ia_dibujo.permitirDibujo(escenario,self.activo,u.x,u.y) && IA.prototype.teclaCorrecta(self.tecla)) {
+      ia_dibujo.empezarDibujo(obj,self.ID,u.x,u.y,self.movmousex,self.movmousey,self.tecla);
+      self.activo = IA.prototype.opuesto(self.activo);
     }
     // Para terminar necesito que activo sea true y para que sirva en el metodo le doy el valor opuesto.
-    else if(inteligencia.permitirDibujo(escenario,!self.activo,u.x,u.y)){
-      inteligencia.finalizarDibujo(obj,monitor_obj,self.ID,u.x,u.y,self.tecla);
+    else if(ia_dibujo.permitirDibujo(escenario,!self.activo,u.x,u.y)){
+      ia_dibujo.finalizarDibujo(obj,monitor_obj,self.ID,u.x,u.y,self.tecla);
 
       Tablero.prototype.limpiar(tablero);
       Area.prototype.colorear(menu_servidor, 'red');
@@ -56,13 +56,13 @@ function Oyente(canvas) {
     }
 
     // Esto se realiza en el area-monitor.
-    else if(inteligencia.permitirDibujo(monitor_objetos,self.activo,u.x,u.y)) {
-      var i = inteligencia.seleccionEnlace(monitor_obj,event.x - self.tableroX,event.y - self.tableroY);
+    else if(ia_dibujo.permitirDibujo(monitor_objetos,self.activo,u.x,u.y)) {
+      var i = ia_enlace.seleccionEnlace(monitor_obj,event.x - self.tableroX,event.y - self.tableroY);
       var dir;
       if(i != -1){
-        dir = inteligencia.obtenerObjetoEnlace(monitor_obj,obj,i);
+        dir = ia_enlace.obtenerObjetoEnlace(monitor_obj,obj,i);
         if(self.seleccion_objeto == -1) {
-          inteligencia.pintarSeleccion(monitor_obj,monitor_objetos,i);
+          ia_enlace.pintarSeleccion(monitor_obj,monitor_objetos,i);
           obj.objetos[dir].color = "red";
           obj.objetos[dir].dibujar();
           self.seleccion_objeto = dir;
@@ -71,7 +71,7 @@ function Oyente(canvas) {
         else {
           obj.objetos[self.seleccion_objeto].color = "blue";
           obj.objetos[self.seleccion_objeto].dibujar();
-          inteligencia.pintarSeleccion(monitor_obj,monitor_objetos,i);
+          ia_enlace.pintarSeleccion(monitor_obj,monitor_objetos,i);
           obj.objetos[dir].color = "red";
           obj.objetos[dir].dibujar();
           self.seleccion_objeto = dir;
