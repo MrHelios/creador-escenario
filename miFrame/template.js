@@ -5,7 +5,6 @@ var path = require('path');
 render = function(direccion, response, cambiar, adicional) {
   fs.readFile(direccion, function(err,data) {
     if(err) {
-      console.log(err);
       response.end();
     }
     else {
@@ -36,14 +35,12 @@ render_otro = function(direccion, response, tipo) {
       response.end(data);
     }
     else {
-      if( tipo == '.js') {
-        response.setHeader('content-type','text/javascript');
+      if('.js' == tipo) {
+        response.writeHead(200,{'Content-Type':'text/javascript'});
       }
-      else if( tipo == '.css') {
-        response.setHeader('content-type','text/css');
+      else if('.css' == tipo) {
+        response.writeHead(200,{'Content-Type':'text/css'});        
       }
-      response.setHeader('content-length', data.length);
-      response.statusCode = 200;
       response.end(data);
     }
   })

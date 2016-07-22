@@ -2,13 +2,19 @@ var template = require('./template');
 
 var manejadorURL = function(request, response, urls) {
   // Para HTML
-  if( request.url in urls ) urls[request.url](request, response);
+  if( request.url in urls ) {
+    urls[request.url](request, response);
+  }
   // Para otros archivos estaticos.
   else if(request.url.indexOf('.js') != -1 || request.url.indexOf('.css') != -1) {
     var dir = template.direccion(__dirname, request.url);
 
-    if(request.url.indexOf('.js') != -1) template.render_otro(dir, response, request.url.indexOf('.js'));
-    else if(request.url.indexOf('.css') != -1) template.render_otro(dir, response, request.url.indexOf('.css'));
+    if(request.url.indexOf('.js') != -1) {
+      template.render_otro(dir, response, '.js');
+    }
+    else if(request.url.indexOf('.css') != -1) {
+      template.render_otro(dir, response, '.css');
+    }
   }
   else {
     response.writeHead(404);
